@@ -1,3 +1,4 @@
+--Create database rattrapage
 drop schema if exists rattrapage CASCADE;
 create schema rattrapage;
 set search_path to rattrapage;
@@ -89,15 +90,18 @@ CREATE TABLE Gere(
 );
 
 INSERT INTO Responsable(nom, prenom, mail, password) values 
-   ('Mitterrand', 'François', 'francois.mitterand@epsi.fr', 'francois');
+   ('Mitterrand', 'François', 'francois.mitterand@ispe.fr', 'francois'),
+   ('Bloom', 'Léon', 'leon.bloom@ispe.fr', 'Leon');
 
 INSERT INTO Professeur(nom, prenom, mail, password) values 
-   ('Giscard d''Estaing', 'Valéry', 'valery.giscard@epsi.fr', 'valery'),
-   ('Chirac', 'Jacques', 'jacques.chirac@epsi.fr', 'jacques');
+   ('Giscard d''Estaing', 'Valéry', 'valery.giscard@ispe.fr', 'valery'),
+   ('Chirac', 'Jacques', 'jacques.chirac@ispe.fr', 'jacques'),
+   ('Jospin', 'Lionel','lionel.jospin@ispe.fr','lionnel');
 
 INSERT INTO Surveillant(nom, prenom, mail, password) values 
-   ('De Gaulle', 'Charles', 'charles.degaulle@epsi.fr', 'charles'),
-   ('Pompidou', 'Georges', 'georges.pompidou@epsi.fr', 'georges');
+   ('De Gaulle', 'Charles', 'charles.degaulle@ispe.fr', 'charles'),
+   ('Pompidou', 'Georges', 'georges.pompidou@ispe.fr', 'georges'),
+   ('Cresson', 'Edith', 'edith.cresson@ispe.fr', 'edith');
 
 INSERT INTO Salle(nom_salle, nbr_place) values
    ('A1', 15),
@@ -121,7 +125,12 @@ INSERT INTO Eleve(nom, prenom, photo) values
    ('Cat', 'Scat', 'scatcat.png'),
    ('Pierrafeu', 'Fred', 'fredpierrafeu.png'),
    ('Logre', 'Shrek', 'shreklogre.png'),
-   ('Dinkley', 'Vera', 'veradinkley.png');
+   ('Dinkley', 'Vera', 'veradinkley.png'),
+   ('Luxe','Paul','paulluxe.png'),
+   ('Blanc','Michel','michelblanc.png'),
+   ('Blanc','Gérard','gerardblanc.png'),
+   ('Noir','Michel','michelnoir.png'),
+   ('Demonaco','Stephanie','stephaniedemonaco');
 
 INSERT INTO Rattrapage(sujet, date_rattrapage, heure_rattrapage, duree_rattrapage, id_professeur, id_surveillant, id_salle, id_matiere) values
    ('sujet_math.pdf', '11/09/2022', TIME '10:00:00', TIME '02:00:00', 1, 1, 1, 1),
