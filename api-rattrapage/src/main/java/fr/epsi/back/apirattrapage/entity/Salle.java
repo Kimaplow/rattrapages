@@ -1,11 +1,9 @@
 package fr.epsi.back.apirattrapage.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "salle")
 public class Salle {
 
     @Id
@@ -13,6 +11,10 @@ public class Salle {
     private long idSalle;
     private String nom;
     private int nbrPlace;
+
+    @ManyToOne
+    @JoinColumn(name = "rattrapage_id")
+    private Rattrapage rattrapage;
 
     public long getIdSalle() {
         return idSalle;
@@ -32,5 +34,13 @@ public class Salle {
 
     public void setNbrPlace(int nbrPlace) {
         this.nbrPlace = nbrPlace;
+    }
+
+    public Rattrapage getRattrapage() {
+        return rattrapage;
+    }
+
+    public void setRattrapage(Rattrapage rattrapage) {
+        this.rattrapage = rattrapage;
     }
 }

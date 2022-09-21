@@ -1,11 +1,9 @@
 package fr.epsi.back.apirattrapage.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "eleve")
 public class Eleve {
 
     @Id
@@ -42,4 +40,7 @@ public class Eleve {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+
+
 }

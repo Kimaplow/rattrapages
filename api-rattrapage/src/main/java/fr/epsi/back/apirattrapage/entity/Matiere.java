@@ -1,11 +1,14 @@
 package fr.epsi.back.apirattrapage.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "matiere")
 public class Matiere {
 
     @Id
@@ -13,6 +16,10 @@ public class Matiere {
     private long idMatiere;
     private String code;
     private String libelle;
+
+    @OneToMany(mappedBy = "matiere", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("matiere")
+    private List<Rattrapage> rattrapages;
 
     public long getIdMatiere() {
         return idMatiere;
@@ -32,5 +39,13 @@ public class Matiere {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public List<Rattrapage> getRattrapages() {
+        return rattrapages;
+    }
+
+    public void setRattrapages(List<Rattrapage> rattrapages) {
+        this.rattrapages = rattrapages;
     }
 }

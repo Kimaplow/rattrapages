@@ -1,11 +1,9 @@
 package fr.epsi.back.apirattrapage.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "personne")
 public class Personne {
 
     @Id
@@ -16,6 +14,10 @@ public class Personne {
     private String mail;
     private String password;
     private String role;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rattrapage")
+    private Rattrapage rattrapage;
 
     public long getId() {
         return idPersonne;
