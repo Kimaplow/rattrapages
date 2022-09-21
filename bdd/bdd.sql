@@ -3,7 +3,7 @@ drop schema if exists rattrapage CASCADE;
 create schema rattrapage;
 set search_path to rattrapage;
 
-CREATE TABLE Personne(
+CREATE TABLE personne(
    id_personne Serial,
    nom VARCHAR(20) NOT NULL,
    prenom VARCHAR(20) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE Personne(
    PRIMARY KEY(id_personne)
 );
 
-CREATE TABLE Eleve(
+CREATE TABLE eleve(
    id_eleve Serial,
    nom VARCHAR(50) NOT NULL,
    prenom VARCHAR(50) NOT NULL,
@@ -21,21 +21,21 @@ CREATE TABLE Eleve(
    PRIMARY KEY(id_eleve)
 );
 
-CREATE TABLE Salle(
+CREATE TABLE salle(
    id_salle Serial,
-   nom_salle VARCHAR(50) NOT NULL,
+   nom VARCHAR(50) NOT NULL,
    nbr_place INT CHECK(nbr_place > 0) NOT NULL,
    PRIMARY KEY(id_salle)
 );
 
-CREATE TABLE Matiere(
+CREATE TABLE matiere(
    id_matiere Serial,
-   code_matiere VARCHAR(50) NOT NULL,
-   libelle_matiere VARCHAR(50) NOT NULL,
+   code VARCHAR(50) NOT NULL,
+   libelle VARCHAR(50) NOT NULL,
    PRIMARY KEY(id_matiere)
 );
 
-CREATE TABLE Rattrapage(
+CREATE TABLE rattrapage(
    id_rattrapage Serial,
    sujet VARCHAR(50) NOT NULL,
    date_rattrapage DATE NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE Rattrapage(
    FOREIGN KEY(id_matiere) REFERENCES Matiere(id_matiere)
 );
 
-CREATE TABLE Convocation(
+CREATE TABLE convocation(
    id_eleve Serial,
    id_rattrapage INT,
    note float CHECK(note >= 0 and note <= 20) NOT NULL,
@@ -64,15 +64,7 @@ CREATE TABLE Convocation(
    FOREIGN KEY(id_rattrapage) REFERENCES Rattrapage(id_rattrapage)
 );
 
-CREATE TABLE Gere(
-   id_responsable INT,
-   id_rattrapage INT,
-   PRIMARY KEY(id_responsable, id_rattrapage),
-   FOREIGN KEY(id_responsable) REFERENCES Personne(id_personne),
-   FOREIGN KEY(id_rattrapage) REFERENCES Personne(id_personne)
-);
-
-INSERT INTO Personne(nom, prenom, mail, password, role) values 
+INSERT INTO personne(nom, prenom, mail, password, role) values 
    ('Mitterrand', 'François', 'francois.mitterand@ispe.fr', 'francois', 'responsable'),
    ('Bloom', 'Léon', 'leon.bloom@ispe.fr', 'Leon', 'responsable'),
    ('Giscard d''Estaing', 'Valéry', 'valery.giscard@ispe.fr', 'valery', 'professeur'),
@@ -82,19 +74,19 @@ INSERT INTO Personne(nom, prenom, mail, password, role) values
    ('Pompidou', 'Georges', 'georges.pompidou@ispe.fr', 'georges', 'surveillant'),
    ('Cresson', 'Edith', 'edith.cresson@ispe.fr', 'edith', 'surveillant');
 
-INSERT INTO Salle(nom_salle, nbr_place) values
+INSERT INTO salle(nom, nbr_place) values
    ('A1', 15),
    ('B2', 10),
    ('C3', 30),
    ('D4', 18);
 
-INSERT INTO Matiere(code_matiere, libelle_matiere) values
+INSERT INTO matiere(code, libelle) values
    ('UE1', 'Mathématiques'),
    ('UE2', 'Français'),
    ('UE3', 'Histoire'),
    ('UE4', 'Physique');
 
-INSERT INTO Eleve(nom, prenom, photo) values
+INSERT INTO eleve(nom, prenom, photo) values
    ('Le Gaulois', 'Astérix', 'asterixlegaulois.png'),
    ('Luke', 'Lucky', 'luckyluke.png'),
    ('Bunny', 'Bugs', 'bugsbunny.png'),
@@ -111,11 +103,11 @@ INSERT INTO Eleve(nom, prenom, photo) values
    ('Noir','Michel','michelnoir.png'),
    ('Demonaco','Stephanie','stephaniedemonaco');
 
-INSERT INTO Rattrapage(sujet, date_rattrapage, heure_rattrapage, duree_rattrapage, id_professeur, id_surveillant, id_salle, id_matiere) values
+INSERT INTO rattrapage(sujet, date_rattrapage, heure_rattrapage, duree_rattrapage, id_professeur, id_surveillant, id_salle, id_matiere) values
    ('sujet_math.pdf', '11/09/2022', TIME '10:00:00', TIME '02:00:00', 3, 6, 1, 1),
    ('sujet_francais.pdf', '12/09/2022', TIME '08:00:00', TIME '04:00:00', 4, 7, 2, 2);
 
-INSERT INTO Convocation(id_eleve, id_rattrapage, note, present, heure_rendu) values
+INSERT INTO convocation(id_eleve, id_rattrapage, note, present, heure_rendu) values
    (1, 1, 10, true, '09:40:00'),
    (2, 2, 11, true, '09:45:00'),
    (3, 1, 12, true, '09:50:00'),
@@ -126,7 +118,3 @@ INSERT INTO Convocation(id_eleve, id_rattrapage, note, present, heure_rendu) val
    (8, 2, 17, true, '09:00:00'),
    (9, 1, 0, false, NULL),
    (10, 2, 0, false, NULL);
-
-INSERT INTO Gere(id_responsable, id_rattrapage) VALUES
-   (1, 1),
-   (1, 2);
