@@ -29,6 +29,10 @@ public class Convocation {
         return id;
     }
 
+    public void setId(ConvocationKey id) {
+        this.id = id;
+    }
+
     public Eleve getEleve() {
         return eleve;
     }

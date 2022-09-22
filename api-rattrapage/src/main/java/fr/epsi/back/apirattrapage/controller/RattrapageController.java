@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,18 @@ public class RattrapageController {
     @GetMapping("/{id}")
     public Optional<Rattrapage> getRattrapage(@PathVariable long id){
         return rattrapageRepository.findById(id);
+    }
+
+    @GetMapping("/surveillant/{id}")
+    public List<Rattrapage> getRattrapageBySurveillant(@PathVariable long id){
+        List<Rattrapage> rattrapages = rattrapageRepository.findAll();
+        List<Rattrapage> rattrapageSurveillant = new ArrayList<>();
+        for (Rattrapage rattrapage : rattrapages) {
+            if(rattrapage.getSurveillant().getId() == id){
+                rattrapageSurveillant.add(rattrapage);
+            }
+        }
+        return rattrapageSurveillant;
     }
 
 }
