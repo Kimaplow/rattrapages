@@ -101,7 +101,7 @@ INSERT INTO eleve(nom, prenom, photo) values
    ('Blanc','Michel','michelblanc.png'),
    ('Blanc','Gérard','gerardblanc.png'),
    ('Noir','Michel','michelnoir.png'),
-   ('Demonaco','Stephanie','stephaniedemonaco');
+   ('Demonaco','Stephanie','stephaniedemonaco.png');
 
 INSERT INTO rattrapage(sujet, date_rattrapage, heure_rattrapage, duree_rattrapage, id_professeur, id_surveillant, id_salle, id_matiere) values
    ('sujet_math.pdf', '11/09/2022', TIME '10:00:00', TIME '02:00:00', 3, 6, 1, 1),
