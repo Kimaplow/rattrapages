@@ -1,6 +1,9 @@
 package fr.epsi.back.apirattrapage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "salle")
@@ -12,9 +15,9 @@ public class Salle {
     private String nom;
     private int nbrPlace;
 
-    @ManyToOne
-    @JoinColumn(name = "rattrapage_id")
-    private Rattrapage rattrapage;
+    @OneToMany(mappedBy = "salle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"matiere", "salle", "professeur", "surveillant"})
+    private List<Rattrapage> rattrapages;
 
     public long getIdSalle() {
         return idSalle;
@@ -36,11 +39,11 @@ public class Salle {
         this.nbrPlace = nbrPlace;
     }
 
-    public Rattrapage getRattrapage() {
-        return rattrapage;
+    public List<Rattrapage> getRattrapages() {
+        return rattrapages;
     }
 
-    public void setRattrapage(Rattrapage rattrapage) {
-        this.rattrapage = rattrapage;
+    public void setRattrapages(List<Rattrapage> rattrapages) {
+        this.rattrapages = rattrapages;
     }
 }

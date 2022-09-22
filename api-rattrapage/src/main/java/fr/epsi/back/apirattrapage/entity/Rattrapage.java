@@ -1,10 +1,11 @@
 package fr.epsi.back.apirattrapage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "rattrapage")
@@ -15,14 +16,33 @@ public class Rattrapage {
     @Column(name = "id_rattrapage")
     private long idRattrapage;
     private String sujet;
-    private Date date;
-    private Time heure;
-    private Time duree;
+    private java.util.Date date;
+    private java.util.Date heure;
+    private java.util.Date duree;
     private String etat;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_matiere", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_matiere")
+    @JsonIgnoreProperties({"rattrapages"})
     private Matiere matiere;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_salle")
+    @JsonIgnoreProperties({"rattrapages"})
+    private Salle salle;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_professeur")
+    @JsonIgnoreProperties({"rattrapagesSurveillant", "rattrapagesProfesseur"})
+    private Personne professeur;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_surveillant")
+    @JsonIgnoreProperties({"rattrapagesSurveillant", "rattrapagesProfesseur"})
+    private Personne surveillant;
+
+    @OneToMany(mappedBy = "rattrapage")
+    List<Convocation> convocations;
 
     public long getIdRattrapage() {
         return idRattrapage;
@@ -36,7 +56,7 @@ public class Rattrapage {
         this.sujet = sujet;
     }
 
-    public Date getDate() {
+    public java.util.Date getDate() {
         return date;
     }
 
@@ -44,7 +64,7 @@ public class Rattrapage {
         this.date = date;
     }
 
-    public Time getHeure() {
+    public java.util.Date getHeure() {
         return heure;
     }
 
@@ -52,7 +72,7 @@ public class Rattrapage {
         this.heure = heure;
     }
 
-    public Time getDuree() {
+    public java.util.Date getDuree() {
         return duree;
     }
 
@@ -75,4 +95,29 @@ public class Rattrapage {
     public void setMatiere(Matiere matiere) {
         this.matiere = matiere;
     }
+
+    public Salle getSalle() {
+        return salle;
+    }
+
+    public void setSalle(Salle salle) {
+        this.salle = salle;
+    }
+
+    public Personne getProfesseur() {
+        return professeur;
+    }
+
+    public void setProfesseur(Personne professeur) {
+        this.professeur = professeur;
+    }
+
+    public Personne getSurveillant() {
+        return surveillant;
+    }
+
+    public void setSurveillant(Personne surveillant) {
+        this.surveillant = surveillant;
+    }
+
 }

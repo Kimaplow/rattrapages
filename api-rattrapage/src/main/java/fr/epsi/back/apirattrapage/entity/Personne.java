@@ -1,6 +1,9 @@
 package fr.epsi.back.apirattrapage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "personne")
@@ -15,9 +18,13 @@ public class Personne {
     private String password;
     private String role;
 
-    @ManyToOne
-    @JoinColumn(name = "id_rattrapage")
-    private Rattrapage rattrapage;
+    @OneToMany(mappedBy = "professeur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"matiere", "salle", "professeur", "surveillant"})
+    private List<Rattrapage> rattrapagesProfesseur;
+
+    @OneToMany(mappedBy = "surveillant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"matiere", "salle", "professeur", "surveillant"})
+    private List<Rattrapage> rattrapagesSurveillant;
 
     public long getId() {
         return idPersonne;
@@ -61,5 +68,21 @@ public class Personne {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Rattrapage> getRattrapagesProfesseur() {
+        return rattrapagesProfesseur;
+    }
+
+    public void setRattrapagesProfesseur(List<Rattrapage> rattrapagesProfesseur) {
+        this.rattrapagesProfesseur = rattrapagesProfesseur;
+    }
+
+    public List<Rattrapage> getRattrapagesSurveillant() {
+        return rattrapagesSurveillant;
+    }
+
+    public void setRattrapagesSurveillant(List<Rattrapage> rattrapagesSurveillant) {
+        this.rattrapagesSurveillant = rattrapagesSurveillant;
     }
 }

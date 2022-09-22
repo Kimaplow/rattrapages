@@ -18,7 +18,7 @@ public class Matiere {
     private String libelle;
 
     @OneToMany(mappedBy = "matiere", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("matiere")
+    @JsonIgnoreProperties({"matiere", "salle", "professeur", "surveillant"})
     private List<Rattrapage> rattrapages;
 
     public long getIdMatiere() {
