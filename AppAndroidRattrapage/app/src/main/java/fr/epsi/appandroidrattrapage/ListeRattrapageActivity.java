@@ -33,7 +33,6 @@ public class ListeRattrapageActivity extends AppCompatActivity implements OnClic
         rattrapageLayoutManager = new LinearLayoutManager(getBaseContext());
         rattrapageRecyclerview.setLayoutManager(rattrapageLayoutManager);
 
-
         Rattrapage[] listRattrapage = {};
 
         rattrapageAdapter = new RattrapageAdapter(listRattrapage, this);
@@ -44,7 +43,7 @@ public class ListeRattrapageActivity extends AppCompatActivity implements OnClic
         callRattrapages.enqueue(new Callback<Rattrapage[]>() {
             @Override
             public void onResponse(Call<Rattrapage[]> call, Response<Rattrapage[]> response) {
-                System.out.println("ALLO");
+                System.out.println(response.body());
                 rattrapageAdapter = new RattrapageAdapter(response.body(), listener);
                 rattrapageRecyclerview.setAdapter(rattrapageAdapter);
             }
@@ -52,11 +51,9 @@ public class ListeRattrapageActivity extends AppCompatActivity implements OnClic
             @Override
             public void onFailure(Call<Rattrapage[]> call, Throwable t) {
                 System.out.println("NON");
+                System.out.println(t.getMessage());
             }
         });
-
-
-
     }
 
     @Override
