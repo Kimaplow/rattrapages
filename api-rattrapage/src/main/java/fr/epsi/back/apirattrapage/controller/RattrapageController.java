@@ -3,10 +3,7 @@ package fr.epsi.back.apirattrapage.controller;
 import fr.epsi.back.apirattrapage.entity.Rattrapage;
 import fr.epsi.back.apirattrapage.repository.RattrapageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +24,11 @@ public class RattrapageController {
     @GetMapping("/{id}")
     public Optional<Rattrapage> getRattrapage(@PathVariable long id){
         return rattrapageRepository.findById(id);
+    }
+
+    @PostMapping("")
+    public Rattrapage createRattrapage(@RequestBody Rattrapage rattrapage){
+        return rattrapageRepository.save(rattrapage);
     }
 
     @GetMapping("/surveillant/{id}")

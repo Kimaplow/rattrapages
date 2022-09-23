@@ -25,4 +25,9 @@ public class EleveController {
         return eleveRepository.findById(id);
     }
 
+    @PostMapping("")
+    public Eleve createEleve(@RequestBody Eleve eleve){
+        return eleveRepository.save(eleve);
+    }
+
 }

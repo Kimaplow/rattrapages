@@ -1,10 +1,15 @@
 package fr.epsi.back.apirattrapage.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
+@Data
+@Builder(toBuilder = true)
 public class ConvocationKey implements Serializable {
 
     @Column(name="id_eleve")
@@ -12,6 +17,13 @@ public class ConvocationKey implements Serializable {
 
     @Column(name="id_rattrapage")
     private long idRattrapage;
+
+    public ConvocationKey(){};
+
+    public ConvocationKey(long idEleve, long idRattrapage){
+        this.idEleve = idEleve;
+        this.idRattrapage = idRattrapage;
+    }
 
     public long getIdEleve() {
         return idEleve;
@@ -27,5 +39,23 @@ public class ConvocationKey implements Serializable {
 
     public void setIdRattrapage(long idRattrapage) {
         this.idRattrapage = idRattrapage;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "ConvocationKey{" +
+                "idEleve=" + idEleve +
+                ", idRattrapage=" + idRattrapage +
+                '}';
     }
 }

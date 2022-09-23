@@ -1,9 +1,9 @@
 package fr.epsi.back.apirattrapage.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Table(name = "convocation")
@@ -14,16 +14,19 @@ public class Convocation {
 
     @ManyToOne
     @MapsId("idEleve")
-    @JoinColumn(name="id_eleve")
+    @JoinColumn(name="id_eleve", insertable=false, updatable=false)
     private Eleve eleve;
 
     @ManyToOne
     @MapsId("idRattrapage")
-    @JoinColumn(name="id_rattrapage")
+    @JoinColumn(name="id_rattrapage", insertable=false, updatable=false)
     @JsonIgnoreProperties({"matiere", "salle", "professeur", "surveillant"})
     private Rattrapage rattrapage;
 
     private float note;
+    private boolean present;
+
+    public Convocation(){};
 
     public ConvocationKey getId() {
         return id;
@@ -55,5 +58,24 @@ public class Convocation {
 
     public void setNote(float note) {
         this.note = note;
+    }
+
+    public boolean isPresent() {
+        return present;
+    }
+
+    public void setPresent(boolean present) {
+        this.present = present;
+    }
+
+    @Override
+    public String toString() {
+        return "Convocation{" +
+                "id=" + id +
+                ", eleve=" + eleve +
+                ", rattrapage=" + rattrapage +
+                ", note=" + note +
+                ", present=" + present +
+                '}';
     }
 }
