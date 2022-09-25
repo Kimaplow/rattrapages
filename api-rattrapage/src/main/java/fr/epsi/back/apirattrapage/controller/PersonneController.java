@@ -21,13 +21,47 @@ public class PersonneController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Personne> getPersonne(@PathVariable long id){
-        return personnesRepository.findById(id);
+    public Personne getPersonne(@PathVariable long id){
+        return personnesRepository.findById(id).get();
+    }
+
+    @GetMapping("/role/{role}")
+    public List<Personne> getPersonneByRole(@PathVariable String role){
+        return personnesRepository.findByRole(role);
     }
 
     @PostMapping("")
     public Personne createPersonne(@RequestBody Personne personne){
         return personnesRepository.save(personne);
+    }
+
+    @PutMapping("/{id}")
+    public Personne updatePersonne(@PathVariable long id, @RequestBody Personne personne){
+        Personne p = personnesRepository.findById(id).get();
+
+        if(personne.getMail() != null){
+            p.setMail(personne.getMail());
+        }
+
+        if(personne.getNom() != null){
+            p.setNom(personne.getNom());
+        }
+
+        if(personne.getPrenom() != null){
+            p.setPrenom(personne.getPrenom());
+        }
+
+        if(personne.getPassword() != null){
+            p.setPassword(personne.getPassword());
+        }
+
+        return personnesRepository.save(p);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePersonne(@PathVariable long id){
+        Personne p = personnesRepository.findById(id).get();
+        personnesRepository.delete(p);
     }
 
 }

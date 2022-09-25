@@ -20,7 +20,7 @@ public class ConvocationKey implements Serializable {
 
     public ConvocationKey(){};
 
-    public ConvocationKey(long idEleve, long idRattrapage){
+    public ConvocationKey(long idRattrapage, long idEleve){
         this.idEleve = idEleve;
         this.idRattrapage = idRattrapage;
     }
@@ -51,11 +51,4 @@ public class ConvocationKey implements Serializable {
         return super.equals(obj);
     }
 
-    @Override
-    public String toString() {
-        return "ConvocationKey{" +
-                "idEleve=" + idEleve +
-                ", idRattrapage=" + idRattrapage +
-                '}';
-    }
 }

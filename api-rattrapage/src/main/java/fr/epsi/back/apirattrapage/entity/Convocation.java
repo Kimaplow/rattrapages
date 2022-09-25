@@ -3,7 +3,6 @@ package fr.epsi.back.apirattrapage.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @Entity
 @Table(name = "convocation")
@@ -26,14 +25,8 @@ public class Convocation {
     private float note;
     private boolean present;
 
-    public Convocation(){};
-
     public ConvocationKey getId() {
         return id;
-    }
-
-    public void setId(ConvocationKey id) {
-        this.id = id;
     }
 
     public Eleve getEleve() {
@@ -68,14 +61,4 @@ public class Convocation {
         this.present = present;
     }
 
-    @Override
-    public String toString() {
-        return "Convocation{" +
-                "id=" + id +
-                ", eleve=" + eleve +
-                ", rattrapage=" + rattrapage +
-                ", note=" + note +
-                ", present=" + present +
-                '}';
-    }
 }

@@ -21,13 +21,34 @@ public class SalleController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Salle> getSalle(@PathVariable long id){
-        return salleRepository.findById(id);
+    public Salle getSalle(@PathVariable long id){
+        return salleRepository.findById(id).get();
     }
 
     @PostMapping("")
     public Salle createSalle(@RequestBody Salle salle){
         return salleRepository.save(salle);
+    }
+
+    @PutMapping("/{id}")
+    public Salle updateSalle(@PathVariable long id, @RequestBody Salle salle){
+        Salle s = salleRepository.findById(id).get();
+
+        if(salle.getNom() != null){
+            s.setNom(salle.getNom());
+        }
+
+        if(salle.getNbrPlace() != 0){
+            s.setNbrPlace(salle.getNbrPlace());
+        }
+
+        return salleRepository.save(s);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteSalle(@PathVariable long id){
+        Salle salle = salleRepository.findById(id).get();
+        salleRepository.delete(salle);
     }
 
 }
