@@ -7,7 +7,7 @@ CREATE TABLE personne(
    id_personne Serial,
    nom VARCHAR(20) NOT NULL,
    prenom VARCHAR(20) NOT NULL,
-   mail VARCHAR(50) NOT NULL,
+   mail VARCHAR(50) UNIQUE NOT NULL,
    password VARCHAR(50) NOT NULL,
    role VARCHAR(50) NOT NULL,
    PRIMARY KEY(id_personne)
@@ -38,9 +38,9 @@ CREATE TABLE matiere(
 CREATE TABLE rattrapage(
    id_rattrapage Serial,
    sujet VARCHAR(50) NOT NULL,
-   date_rattrapage DATE NOT NULL,
-   heure_rattrapage TIME CHECK(heure_rattrapage >= TIME '08:00:00' AND heure_rattrapage <= TIME '16:00:00') NOT NULL,
-   duree_rattrapage TIME CHECK(duree_rattrapage >= TIME '01:00:00' AND duree_rattrapage <= TIME '04:00:00') NOT NULL,
+   date_r DATE NOT NULL,
+   heure_r TIME CHECK(heure_r >= TIME '08:00:00' AND heure_r <= TIME '16:00:00') NOT NULL,
+   duree_r INT CHECK(duree_r >= 60 AND duree_r <= 240) NOT NULL,
    etat VARCHAR(50) NOT NULL DEFAULT 'Non effectué', 
    id_professeur INT NOT NULL,
    id_surveillant INT NOT NULL,
@@ -57,8 +57,8 @@ CREATE TABLE convocation(
    id_eleve Serial,
    id_rattrapage INT,
    note float CHECK(note >= 0 and note <= 20) NOT NULL,
-   present Boolean NOT NULL,
-   heure_rendu TIME,
+   present Boolean NOT NULL DEFAULT false,
+   heure_rendu TIME DEFAULT NULL,
    PRIMARY KEY(id_eleve, id_rattrapage),
    FOREIGN KEY(id_eleve) REFERENCES Eleve(id_eleve),
    FOREIGN KEY(id_rattrapage) REFERENCES Rattrapage(id_rattrapage)
@@ -103,9 +103,9 @@ INSERT INTO eleve(nom, prenom, photo) values
    ('Noir','Michel','michelnoir.png'),
    ('Demonaco','Stephanie','stephaniedemonaco.png');
 
-INSERT INTO rattrapage(sujet, date_rattrapage, heure_rattrapage, duree_rattrapage, id_professeur, id_surveillant, id_salle, id_matiere) values
-   ('sujet_math.pdf', '11/09/2022', TIME '10:00:00', TIME '02:00:00', 3, 6, 1, 1),
-   ('sujet_francais.pdf', '12/09/2022', TIME '08:00:00', TIME '04:00:00', 4, 7, 2, 2);
+INSERT INTO rattrapage(sujet, date_r, heure_r, duree_r, id_professeur, id_surveillant, id_salle, id_matiere) values
+   ('sujet_math.pdf', '2022-10-20', '10:00:00', 120, 3, 6, 1, 1),
+   ('sujet_francais.pdf', '2022-10-21', '08:00:00', 240, 4, 7, 2, 2);
 
 INSERT INTO convocation(id_eleve, id_rattrapage, note, present, heure_rendu) values
    (1, 1, 10, true, '09:40:00'),
