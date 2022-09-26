@@ -103,9 +103,11 @@ INSERT INTO eleve(nom, prenom, photo) values
    ('Noir','Michel','michelnoir.png'),
    ('Demonaco','Stephanie','stephaniedemonaco.png');
 
-INSERT INTO rattrapage(sujet, date, heure, duree, id_professeur, id_surveillant, id_salle, id_matiere) values
-   ('sujet_math.pdf', '2022-10-20', '10:00:00', 120, 3, 6, 1, 1),
-   ('sujet_francais.pdf', '2022-10-21', '08:00:00', 240, 4, 7, 2, 2);
+INSERT INTO rattrapage(sujet, date, heure, duree, etat, id_professeur, id_surveillant, id_salle, id_matiere) values
+   ('sujet_math.pdf', '2022-10-20', '10:00:00', 120, 'Effectué et noté', 3, 6, 1, 1),
+   ('sujet_physique.pdf', '2022-10-20', '14:00:00', 180, 'Effectué et noté', 3, 6, 4, 4),
+   ('sujet_histoire.pdf', '2022-10-21', '10:00:00', 120, 'Effectué mais non noté', 5, 8, 3, 3),
+   ('sujet_francais.pdf', '2022-10-21', '08:00:00', 240, 'Effectué et noté', 4, 7, 2, 2);
 
 INSERT INTO convocation(id_eleve, id_rattrapage, note, present, heure_rendu) values
    (1, 1, 10, true, '09:40:00'),
@@ -117,4 +119,12 @@ INSERT INTO convocation(id_eleve, id_rattrapage, note, present, heure_rendu) val
    (7, 1, 16, true, '08:55:00'),
    (8, 2, 17, true, '09:00:00'),
    (9, 1, 0, false, NULL),
-   (10, 2, 0, false, NULL);
+   (10, 2, 0, false, NULL),
+   (2, 3, 0, false, NULL),
+   (4, 4, 0, false, NULL),
+   (6, 3, 0, false, NULL),
+   (8, 4, 0, false, NULL),
+   (1, 3, 0, false, NULL),
+   (3, 4, 0, false, NULL),
+   (5, 3, 0, false, NULL),
+   (7, 4, 0, false, NULL);
