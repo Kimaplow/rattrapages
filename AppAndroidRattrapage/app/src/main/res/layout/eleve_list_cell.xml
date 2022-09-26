@@ -12,37 +12,44 @@
     android:layout_marginRight="30dp"
     android:layout_marginBottom="15dp">
 
-    <TextView
-        android:id="@+id/codeMatiereCell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Code matière - Matière"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/profSalleCell"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/photoEleveCell"
+        android:layout_width="63dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/profSalleCell"
+        android:id="@+id/prenomEleveCell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Professeur - Salle"
+        android:layout_marginStart="25dp"
+        android:text="Christophe"
         android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/photoEleveCell"
+        app:layout_constraintTop_toTopOf="@+id/buttonDevoirRendu" />
+
+    <TextView
+        android:id="@+id/nomEleveCell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="Guidé"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonDevoirRendu"
+        app:layout_constraintStart_toEndOf="@+id/photoEleveCell" />
+
+    <Button
+        android:id="@+id/buttonDevoirRendu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/magenta_fonce"
+        android:text="Devoir rendu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/dateHeureCell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date - Heure"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profSalleCell" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
