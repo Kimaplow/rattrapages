@@ -38,9 +38,9 @@ CREATE TABLE matiere(
 CREATE TABLE rattrapage(
    id_rattrapage Serial,
    sujet VARCHAR(50) NOT NULL,
-   date_r DATE NOT NULL,
-   heure_r TIME CHECK(heure_r >= TIME '08:00:00' AND heure_r <= TIME '16:00:00') NOT NULL,
-   duree_r INT CHECK(duree_r >= 60 AND duree_r <= 240) NOT NULL,
+   date DATE NOT NULL,
+   heure TIME CHECK(heure >= TIME '08:00:00' AND heure <= TIME '16:00:00') NOT NULL,
+   duree INT CHECK(duree >= 60 AND duree <= 240) NOT NULL,
    etat VARCHAR(50) NOT NULL DEFAULT 'Non effectué', 
    id_professeur INT NOT NULL,
    id_surveillant INT NOT NULL,
@@ -103,7 +103,7 @@ INSERT INTO eleve(nom, prenom, photo) values
    ('Noir','Michel','michelnoir.png'),
    ('Demonaco','Stephanie','stephaniedemonaco.png');
 
-INSERT INTO rattrapage(sujet, date_r, heure_r, duree_r, id_professeur, id_surveillant, id_salle, id_matiere) values
+INSERT INTO rattrapage(sujet, date, heure, duree, id_professeur, id_surveillant, id_salle, id_matiere) values
    ('sujet_math.pdf', '2022-10-20', '10:00:00', 120, 3, 6, 1, 1),
    ('sujet_francais.pdf', '2022-10-21', '08:00:00', 240, 4, 7, 2, 2);
 
