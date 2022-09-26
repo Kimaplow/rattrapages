@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -33,6 +34,17 @@ public class PersonneController {
     @PostMapping("")
     public Personne createPersonne(@RequestBody Personne personne){
         return personnesRepository.save(personne);
+    }
+
+    @PostMapping("/login")
+    public Personne login(@RequestBody Personne personne){
+        Personne p = personnesRepository.findByMail(personne.getMail());
+        if(p != null){
+            if(Objects.equals(personne.getPassword(), p.getPassword())){
+                return p;
+            }
+        }
+        return null;
     }
 
     @PutMapping("/{id}")

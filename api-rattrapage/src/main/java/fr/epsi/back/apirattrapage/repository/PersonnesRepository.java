@@ -9,4 +9,6 @@ public interface PersonnesRepository extends JpaRepository<Personne, Long> {
 
     List<Personne> findByRole(String role);
 
+    Personne findByMail(String mail);
+
 }
