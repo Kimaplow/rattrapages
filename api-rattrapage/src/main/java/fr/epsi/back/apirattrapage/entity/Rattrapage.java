@@ -17,16 +17,11 @@ public class Rattrapage {
     private long idRattrapage;
     private String sujet;
 
-    @Column(name = "date_r")
     private Date date;
 
-    @Column(name = "heure_r")
-    private java.util.Date heure;
+    private Time heure;
 
-    /*
-    @Column(name = "duree_r")
     private int duree;
-     */
 
     private String etat;
 
@@ -65,7 +60,7 @@ public class Rattrapage {
         this.sujet = sujet;
     }
 
-    public java.util.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -73,7 +68,7 @@ public class Rattrapage {
         this.date = date;
     }
 
-    public java.util.Date getHeure() {
+    public Time getHeure() {
         return heure;
     }
 
@@ -81,7 +76,6 @@ public class Rattrapage {
         this.heure = heure;
     }
 
-    /*
     public int getDuree() {
         return duree;
     }
@@ -89,8 +83,6 @@ public class Rattrapage {
     public void setDuree(int duree) {
         this.duree = duree;
     }
-
-     */
 
     public String getEtat() {
         return etat;
