@@ -3,7 +3,9 @@ package fr.epsi.back.apirattrapage.controller;
 import fr.epsi.back.apirattrapage.entity.Convocation;
 import fr.epsi.back.apirattrapage.entity.ConvocationKey;
 import fr.epsi.back.apirattrapage.entity.Eleve;
+import fr.epsi.back.apirattrapage.entity.Rattrapage;
 import fr.epsi.back.apirattrapage.repository.ConvocationRepository;
+import fr.epsi.back.apirattrapage.repository.RattrapageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,9 @@ public class ConvocationController {
     @Autowired
     private ConvocationRepository convocationRepository;
 
+    @Autowired
+    private RattrapageRepository rattrapageRepository;
+
     @GetMapping("")
     public List<Convocation> getAllConvocations(){
         return convocationRepository.findAll();
@@ -30,11 +35,23 @@ public class ConvocationController {
     }
 
     @GetMapping("/rattrapage/{id}/eleves")
-    public List<Eleve> getEleveByIdRattrapage(@PathVariable long id){
-        List<Convocation> convocations = convocationRepository.findAll();
+    public List<Eleve> getElevesByIdRattrapage(@PathVariable long id){
+        Rattrapage r = rattrapageRepository.findById(id).get();
+        List<Convocation> convocationList = convocationRepository.findByRattrapage(r);
         List<Eleve> eleves = new ArrayList<>();
-        for (Convocation c: convocations) {
-            if(c.getId().getIdRattrapage() == id){
+        for (Convocation c: convocationList) {
+            eleves.add(c.getEleve());
+        }
+        return eleves;
+    }
+
+    @GetMapping("/rattrapage/{id}/eleves/present")
+    public List<Eleve> getElevePresentByIdRattrapage(@PathVariable long id){
+        Rattrapage r = rattrapageRepository.findById(id).get();
+        List<Convocation> convocationList = convocationRepository.findByRattrapage(r);
+        List<Eleve> eleves = new ArrayList<>();
+        for (Convocation c: convocationList) {
+            if(c.isPresent()){
                 eleves.add(c.getEleve());
             }
         }
@@ -46,39 +63,27 @@ public class ConvocationController {
         return convocationRepository.save(convocation);
     }
 
-    @PutMapping("/rattrapage/{idRattrapage}/eleve/{idEleve}")
-    public Convocation updateConvocation(@PathVariable long idRattrapage, @PathVariable long idEleve, @RequestBody Convocation convocation){
-        ConvocationKey key = new ConvocationKey(idRattrapage, idEleve);
-        Convocation c =  convocationRepository.findById(key).orElseThrow();
-
-        if(convocation.getNote() == 0 && c.isPresent()){
-            c.setNote(1);
-        }
-        else if(convocation.getNote() != 0){
-            c.setNote(convocation.getNote());
-        }
-
-        //todo verif autre champs
-
-        /*
-        if(convocation.getEleve() != null){
-            c.setEleve(convocation.getEleve());
-        }
-
-        if(convocation.getRattrapage() != null){
-            c.setRattrapage(convocation.getRattrapage());
-        }
-        */
-
-        return convocationRepository.save(c);
-    }
-
     @PatchMapping("/rattrapage/{idRattrapage}/eleve/{idEleve}/present")
     public Convocation setPresentEleve(@PathVariable long idRattrapage, @PathVariable long idEleve){
         ConvocationKey key = new ConvocationKey(idRattrapage, idEleve);
-        Convocation c =  convocationRepository.findById(key).orElseThrow();
+        Convocation c =  convocationRepository.findById(key).get();
         c.setPresent(!c.isPresent());
         return convocationRepository.save(c);
+    }
+
+    @PatchMapping("/rattrapage/{idRattrapage}/eleve/{idEleve}/note")
+    public Convocation setNote(@PathVariable long idRattrapage, @PathVariable long idEleve, @RequestBody Convocation convocation){
+        ConvocationKey key = new ConvocationKey(idRattrapage, idEleve);
+        Convocation c =  convocationRepository.findById(key).get();
+        c.setNote(convocation.getNote());
+        return convocationRepository.save(c);
+    }
+
+    @DeleteMapping("/rattrapage/{idRattrapage}/eleve/{idEleve}")
+    public void deleteConvocation(@PathVariable long idRattrapage, @PathVariable long idEleve){
+        ConvocationKey key = new ConvocationKey(idRattrapage, idEleve);
+        Convocation c =  convocationRepository.findById(key).get();
+        convocationRepository.delete(c);
     }
 
 }
