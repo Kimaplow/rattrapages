@@ -27,7 +27,7 @@ public class Personne {
     @JsonIgnoreProperties({"matiere", "salle", "professeur", "surveillant"})
     private List<Rattrapage> rattrapagesSurveillant;
 
-    public long getId() {
+    public long getIdPersonne() {
         return idPersonne;
     }
 
