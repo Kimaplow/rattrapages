@@ -2,10 +2,12 @@ package fr.epsi.appandroidrattrapage.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Eleve {
+import java.io.Serializable;
+
+public class Eleve implements Serializable {
 
     @SerializedName("idEleve")
-    private long id;
+    private long idEleve;
 
     @SerializedName("nom")
     private String nom;
@@ -15,6 +17,10 @@ public class Eleve {
 
     @SerializedName("photo")
     private String photo;
+
+    public long getIdEleve() {
+        return idEleve;
+    }
 
     public String getNom() {
         return nom;

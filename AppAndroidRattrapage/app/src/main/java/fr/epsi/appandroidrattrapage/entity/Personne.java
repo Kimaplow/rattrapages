@@ -2,7 +2,9 @@ package fr.epsi.appandroidrattrapage.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Personne {
+import java.io.Serializable;
+
+public class Personne implements Serializable {
 
     @SerializedName("idPersonne")
     private long idPersonne;
@@ -21,11 +23,6 @@ public class Personne {
 
     @SerializedName("role")
     private String role;
-
-    public Personne(String mail, String password){
-        this.mail = mail;
-        this.password = password;
-    }
 
     public long getIdPersonne() {
         return idPersonne;

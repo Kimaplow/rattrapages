@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import fr.epsi.appandroidrattrapage.entity.Rattrapage;
+
 public class RattrapageAdapter extends RecyclerView.Adapter<RattrapageHolder> {
 
     private Rattrapage[] listRattrapage;
@@ -26,14 +28,24 @@ public class RattrapageAdapter extends RecyclerView.Adapter<RattrapageHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RattrapageHolder holder, int position) {
-        /*
-        holder.codeMatiere.setText(listRattrapage[position].getCodeMatiere());
-        holder.matiere.setText(listRattrapage[position].getMatiere());
-        holder.professeur.setText(listRattrapage[position].getProfesseur());
-        holder.salle.setText(listRattrapage[position].getSalle());
-        holder.date.setText(listRattrapage[position].getDate());
-        holder.heure.setText(listRattrapage[position].getHeure());
-         */
+        holder.codeMatiere.setText(new StringBuilder().append(listRattrapage[position].getMatiere().getCode())
+                .append(" - ")
+                .append(listRattrapage[position].getMatiere().getLibelle()).toString());
+
+        holder.profSalle.setText(new StringBuilder().append(listRattrapage[position].getPersonne().getPrenom())
+                .append(" ")
+                .append(listRattrapage[position].getPersonne().getNom())
+                .append(" - Salle ")
+                .append(listRattrapage[position].getSalle().getNom()));
+
+
+        holder.dateHeure.setText(new StringBuilder().append(listRattrapage[position].getDate().substring(8,10))
+                .append("/")
+                .append(listRattrapage[position].getDate().substring(5,7))
+                .append(" - ")
+                .append(listRattrapage[position].getHeure().substring(0, 5)));
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

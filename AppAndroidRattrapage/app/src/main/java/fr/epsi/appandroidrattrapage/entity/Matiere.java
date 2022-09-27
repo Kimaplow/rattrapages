@@ -2,7 +2,12 @@ package fr.epsi.appandroidrattrapage.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Matiere {
+import java.io.Serializable;
+
+public class Matiere implements Serializable {
+
+    @SerializedName("idMatiere")
+    private long idMatiere;
 
     @SerializedName("code")
     private String code;

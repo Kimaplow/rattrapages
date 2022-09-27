@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextView message = findViewById(R.id.messageConnexionMainActivity);
         message.setText("");
-
     }
 
     public void clickButtonMainActivity(View v){
@@ -37,44 +36,29 @@ public class MainActivity extends AppCompatActivity {
 
         Intent navigationToListRattrapage = new Intent(this, ListeRattrapageActivity.class);
 
-
         if(!email.equals("") && !password.equals("")) {
-
-            final Personne[] p = new Personne[1];
-
             CallApi callApi = new CallApi();
             Call<Personne> callPersonne = callApi.connexion(email, password);
             callPersonne.enqueue(new Callback<Personne>() {
                 @Override
                 public void onResponse(Call<Personne> call, Response<Personne> response) {
-                    //p[0] = response.body();
-                    navigationToListRattrapage.putExtra("personne", response.body());
-                    startActivity(navigationToListRattrapage);
+                    System.out.println(response.code());
+                    if(response.code() == 200){
+                        message.setText("Connecté !");
+                        navigationToListRattrapage.putExtra("personne", response.body());
+                        startActivity(navigationToListRattrapage);
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<Personne> call, Throwable t) {
                     message.setText("Erreur lors de la connexion");
+                    System.out.println("NON");
                 }
             });
         }
         else{
             message.setText("Entrer un email ET un password correct");
         }
-
-
-
-            if(email.equals("admin") && password.equals("secret")){
-                message.setText("Connecté !");
-
-                Intent navigationToListRattrapage = new Intent(this, ListeRattrapageActivity.class);
-                startActivity(navigationToListRattrapage);
-            }
-            else{
-
-            }
-        }
-
-
     }
 }

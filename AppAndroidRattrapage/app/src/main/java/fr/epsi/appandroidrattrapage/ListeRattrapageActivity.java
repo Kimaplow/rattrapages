@@ -11,6 +11,8 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.epsi.appandroidrattrapage.entity.Personne;
+import fr.epsi.appandroidrattrapage.entity.Rattrapage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +29,8 @@ public class ListeRattrapageActivity extends AppCompatActivity implements OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_rattrapage);
 
+        listener = this;
+
         rattrapageRecyclerview = findViewById(R.id.rattrapagesRecyclerView);
         rattrapageRecyclerview.setHasFixedSize(true);
 
@@ -35,22 +39,22 @@ public class ListeRattrapageActivity extends AppCompatActivity implements OnClic
 
         Rattrapage[] listRattrapage = {};
 
-        rattrapageAdapter = new RattrapageAdapter(listRattrapage, this);
+        rattrapageAdapter = new RattrapageAdapter(listRattrapage, listener);
         rattrapageRecyclerview.setAdapter(rattrapageAdapter);
 
+        Personne p = (Personne) getIntent().getSerializableExtra("personne");
+
         CallApi callApi = new CallApi();
-        Call<Rattrapage[]> callRattrapages = callApi.getRattrapages(6);
+        Call<Rattrapage[]> callRattrapages = callApi.getRattrapages(p.getIdPersonne());
         callRattrapages.enqueue(new Callback<Rattrapage[]>() {
             @Override
             public void onResponse(Call<Rattrapage[]> call, Response<Rattrapage[]> response) {
-                System.out.println(response.body());
                 rattrapageAdapter = new RattrapageAdapter(response.body(), listener);
                 rattrapageRecyclerview.setAdapter(rattrapageAdapter);
             }
 
             @Override
             public void onFailure(Call<Rattrapage[]> call, Throwable t) {
-                System.out.println("NON");
                 System.out.println(t.getMessage());
             }
         });
