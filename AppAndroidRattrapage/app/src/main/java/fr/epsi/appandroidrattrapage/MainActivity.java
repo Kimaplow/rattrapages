@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import fr.epsi.appandroidrattrapage.entity.Personne;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -30,7 +35,35 @@ public class MainActivity extends AppCompatActivity {
         String email = emailMainActivity.getText().toString();
         String password = passwordMainActivity.getText().toString();
 
-        if(!email.equals("") && !password.equals("")){
+        Intent navigationToListRattrapage = new Intent(this, ListeRattrapageActivity.class);
+
+
+        if(!email.equals("") && !password.equals("")) {
+
+            final Personne[] p = new Personne[1];
+
+            CallApi callApi = new CallApi();
+            Call<Personne> callPersonne = callApi.connexion(email, password);
+            callPersonne.enqueue(new Callback<Personne>() {
+                @Override
+                public void onResponse(Call<Personne> call, Response<Personne> response) {
+                    //p[0] = response.body();
+                    navigationToListRattrapage.putExtra("personne", response.body());
+                    startActivity(navigationToListRattrapage);
+                }
+
+                @Override
+                public void onFailure(Call<Personne> call, Throwable t) {
+                    message.setText("Erreur lors de la connexion");
+                }
+            });
+        }
+        else{
+            message.setText("Entrer un email ET un password correct");
+        }
+
+
+
             if(email.equals("admin") && password.equals("secret")){
                 message.setText("Connecté !");
 
@@ -38,12 +71,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(navigationToListRattrapage);
             }
             else{
-                message.setText("Erreur lors de la connexion");
+
             }
         }
-        else{
-            message.setText("Entrer un email ET un password correct");
-        }
+
 
     }
 }

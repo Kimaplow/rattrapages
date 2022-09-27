@@ -1,46 +1,34 @@
 package fr.epsi.appandroidrattrapage;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
+
+import fr.epsi.appandroidrattrapage.entity.Matiere;
+import fr.epsi.appandroidrattrapage.entity.Personne;
+import fr.epsi.appandroidrattrapage.entity.Salle;
 
 public class Rattrapage implements Serializable {
 
-    private String codeMatiere;
-    private String matiere;
-    private String professeur;
-    private String salle;
-    private String date;
-    private String heure;
+    @SerializedName("matiere")
+    private Matiere matiere;
 
-    public Rattrapage(String codeMatiere, String matiere, String professeur, String salle, String date, String heure) {
-        this.codeMatiere = codeMatiere;
-        this.matiere = matiere;
-        this.professeur = professeur;
-        this.salle = salle;
-        this.date = date;
-        this.heure = heure;
-    }
+    @SerializedName("professeur")
+    private Personne personne;
 
-    public String getCodeMatiere() {
-        return codeMatiere;
-    }
+    @SerializedName("salle")
+    private Salle salle;
 
-    public String getMatiere() {
+    public Matiere getMatiere() {
         return matiere;
     }
 
-    public String getProfesseur() {
-        return professeur;
+    public Personne getProfesseur() {
+        return personne;
     }
 
-    public String getSalle() {
+    public Salle getSalle() {
         return salle;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public String getHeure() {
-        return heure;
-    }
 }

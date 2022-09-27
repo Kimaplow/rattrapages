@@ -10,4 +10,11 @@ public class Matiere {
     @SerializedName("libelle")
     private String libelle;
 
+    public String getCode() {
+        return code;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
 }

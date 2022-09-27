@@ -2,8 +2,6 @@ package fr.epsi.appandroidrattrapage.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
-
 public class Rattrapage {
 
     @SerializedName("idRattrapage")
@@ -12,14 +10,10 @@ public class Rattrapage {
     @SerializedName("sujet")
     private String sujet;
 
-    /*
-    @SerializedName("date")
-    private Date date;
-
-    @SerializedName("heure")
+    //todo date/heure
 
     @SerializedName("duree")
-     */
+    private int duree;
 
     @SerializedName("matiere")
     private Matiere matiere;
@@ -28,6 +22,29 @@ public class Rattrapage {
     private Salle salle;
 
     @SerializedName("professeur")
-    private Professeur professeur;
+    private Personne personne;
 
+    public long getIdRattrapage() {
+        return idRattrapage;
+    }
+
+    public String getSujet() {
+        return sujet;
+    }
+
+    public int getDuree() {
+        return duree;
+    }
+
+    public Matiere getMatiere() {
+        return matiere;
+    }
+
+    public Salle getSalle() {
+        return salle;
+    }
+
+    public Personne getPersonne() {
+        return personne;
+    }
 }
