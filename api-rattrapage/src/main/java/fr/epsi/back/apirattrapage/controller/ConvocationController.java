@@ -35,14 +35,9 @@ public class ConvocationController {
     }
 
     @GetMapping("/rattrapage/{id}/eleves")
-    public List<Eleve> getElevesByIdRattrapage(@PathVariable long id){
+    public List<Convocation> getConvocationByIdRattrapage(@PathVariable long id){
         Rattrapage r = rattrapageRepository.findById(id).get();
-        List<Convocation> convocationList = convocationRepository.findByRattrapage(r);
-        List<Eleve> eleves = new ArrayList<>();
-        for (Convocation c: convocationList) {
-            eleves.add(c.getEleve());
-        }
-        return eleves;
+        return convocationRepository.findByRattrapage(r);
     }
 
     @GetMapping("/rattrapage/{id}/eleves/present")
@@ -72,7 +67,8 @@ public class ConvocationController {
     }
 
     @PatchMapping("/rattrapage/{idRattrapage}/eleve/{idEleve}/note")
-    public Convocation setNote(@PathVariable long idRattrapage, @PathVariable long idEleve, @RequestBody Convocation convocation){
+    public Convocation setNote(@PathVariable long idRattrapage, @PathVariable long idEleve,
+                               @RequestBody Convocation convocation){
         ConvocationKey key = new ConvocationKey(idRattrapage, idEleve);
         Convocation c =  convocationRepository.findById(key).get();
         c.setNote(convocation.getNote());
