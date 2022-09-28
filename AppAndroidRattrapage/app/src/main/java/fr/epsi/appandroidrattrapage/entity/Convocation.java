@@ -15,6 +15,9 @@ public class Convocation implements Serializable {
     @SerializedName("present")
     private boolean present;
 
+    @SerializedName("heureRendu")
+    private String heureRendu;
+
     public ConvocationKey getKey() {
         return key;
     }
@@ -27,4 +30,7 @@ public class Convocation implements Serializable {
         return present;
     }
 
+    public String getHeureRendu() {
+        return heureRendu;
+    }
 }

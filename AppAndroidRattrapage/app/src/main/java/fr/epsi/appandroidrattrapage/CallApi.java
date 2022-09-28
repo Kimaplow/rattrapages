@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CallApi {
 
     //192.168.1.60
-    private static final String baseUrl = "http://10.60.12.60:8080/v1/";
+    private static final String baseUrl = "http://192.168.1.60:8080/v1/";
     private static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

@@ -34,10 +34,12 @@ public class EleveAdapter extends RecyclerView.Adapter<EleveHolder> {
     public void onBindViewHolder(@NonNull EleveHolder holder, int position) {
         holder.nomEleve.setText(listEleves[position].getEleve().getNom());
         holder.prenomEleve.setText(listEleves[position].getEleve().getPrenom());
+        holder.heureRendu.setText(listEleves[position].getHeureRendu());
         Picasso.get().load("http://10.60.12.60:8080/photos/scatcat.png").into(holder.photoEleve);
 
         if(listEleves[position].isPresent()){
             holder.button.setBackgroundColor(Color.MAGENTA);
+            holder.heureRendu.setText(listEleves[position].getHeureRendu());
         }
 
         holder.button.setOnClickListener(new View.OnClickListener() {
