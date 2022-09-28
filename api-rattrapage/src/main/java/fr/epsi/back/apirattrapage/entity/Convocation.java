@@ -3,6 +3,7 @@ package fr.epsi.back.apirattrapage.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.sql.Time;
 
 @Entity
 @Table(name = "convocation")
@@ -24,6 +25,8 @@ public class Convocation {
 
     private float note;
     private boolean present;
+
+    private Time heureRendu;
 
     public ConvocationKey getId() {
         return id;
@@ -61,4 +64,11 @@ public class Convocation {
         this.present = present;
     }
 
+    public Time getHeureRendu() {
+        return heureRendu;
+    }
+
+    public void setHeureRendu(Time heureRendu) {
+        this.heureRendu = heureRendu;
+    }
 }

@@ -29,15 +29,38 @@ public class RattrapageController {
         return rattrapageRepository.findById(id).get();
     }
 
+    @GetMapping("/noneffectues")
+    public List<Rattrapage> getRattrapageNonEffectues(){
+        return rattrapageRepository.findByEtat("Non effectué");
+    }
+
     @PostMapping("")
     public Rattrapage createRattrapage(@RequestBody Rattrapage rattrapage){
         return rattrapageRepository.save(rattrapage);
     }
 
     @GetMapping("/surveillant/{id}")
-    public List<Rattrapage> getRattrapageBySurveillant(@PathVariable long id){
+    public List<Rattrapage> getRattrapegeBySurveillant(@PathVariable long id){
         Personne surveillant = personnesRepository.findById(id).get();
         return rattrapageRepository.findBySurveillant(surveillant);
+    }
+
+    @GetMapping("/professeur/{id}")
+    public List<Rattrapage> getRattrapegeByProfesseur(@PathVariable long id){
+        Personne professeur = personnesRepository.findById(id).get();
+        return rattrapageRepository.findByProfesseur(professeur);
+    }
+
+    @GetMapping("/surveillant/{id}/restant")
+    public List<Rattrapage> getRattrapageNonEffectuesBySurveillant(@PathVariable long id){
+        Personne surveillant = personnesRepository.findById(id).get();
+        return rattrapageRepository.findByEtatAndSurveillant("Non effectué", surveillant);
+    }
+
+    @GetMapping("/professeur/{id}/restant")
+    public List<Rattrapage> getRattrapageNonEffectuesByProfesseur(@PathVariable long id){
+        Personne professeur = personnesRepository.findById(id).get();
+        return rattrapageRepository.findByEtatAndProfesseur("Non effectué", professeur);
     }
 
     @PutMapping("/{id}")

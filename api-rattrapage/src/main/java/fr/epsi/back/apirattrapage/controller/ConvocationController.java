@@ -9,6 +9,7 @@ import fr.epsi.back.apirattrapage.repository.RattrapageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,7 +63,14 @@ public class ConvocationController {
     public Convocation setPresentEleve(@PathVariable long idRattrapage, @PathVariable long idEleve){
         ConvocationKey key = new ConvocationKey(idRattrapage, idEleve);
         Convocation c =  convocationRepository.findById(key).get();
-        c.setPresent(!c.isPresent());
+        if(c.isPresent()){
+            c.setPresent(false);
+            c.setHeureRendu(null);
+        }
+        else{
+            c.setPresent(true);
+            c.setHeureRendu(Time.valueOf(java.time.LocalTime.now()));
+        }
         return convocationRepository.save(c);
     }
 

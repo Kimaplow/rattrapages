@@ -10,4 +10,11 @@ public interface RattrapageRepository extends JpaRepository<Rattrapage, Long> {
 
     List<Rattrapage> findBySurveillant(Personne surveillant);
 
+    List<Rattrapage> findByProfesseur(Personne professeur);
+
+    List<Rattrapage> findByEtat(String etat);
+
+    List<Rattrapage> findByEtatAndSurveillant(String etat, Personne surveillant);
+    List<Rattrapage> findByEtatAndProfesseur(String etat, Personne professeur);
+
 }
