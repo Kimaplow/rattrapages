@@ -87,21 +87,21 @@ INSERT INTO matiere(code, libelle) values
    ('UE4', 'Physique');
 
 INSERT INTO eleve(nom, prenom, photo) values
-   ('Le Gaulois', 'Astérix', 'asterixlegaulois.png'),
-   ('Luke', 'Lucky', 'luckyluke.png'),
-   ('Bunny', 'Bugs', 'bugsbunny.png'),
-   ('Mouse', 'Mickey', 'mickeymouse.png'),
-   ('Simpson', 'Homer', 'homersimpson.png'),
-   ('Duck', 'Donald', 'donaldduck.png'),
-   ('Cat', 'Scat', 'scatcat.png'),
-   ('Pierrafeu', 'Fred', 'fredpierrafeu.png'),
-   ('Logre', 'Shrek', 'shreklogre.png'),
-   ('Dinkley', 'Vera', 'veradinkley.png'),
-   ('Luxe','Paul','paulluxe.png'),
-   ('Blanc','Michel','michelblanc.png'),
-   ('Blanc','Gérard','gerardblanc.png'),
-   ('Noir','Michel','michelnoir.png'),
-   ('Demonaco','Stephanie','stephaniedemonaco.png');
+   ('Le Gaulois', 'Astérix', 'asterixlegaulois.jpg'),
+   ('Luke', 'Lucky', 'luckyluke.jpg'),
+   ('Bunny', 'Bugs', 'bugsbunny.jpg'),
+   ('Mouse', 'Mickey', 'mickeymouse.jpg'),
+   ('Simpson', 'Homer', 'homersimpson.jpg'),
+   ('Duck', 'Donald', 'donaldduck.jpg'),
+   ('Cat', 'Scat', 'scatcat.jpg'),
+   ('Pierrafeu', 'Fred', 'fredpierrafeu.jpg'),
+   ('Logre', 'Shrek', 'shreklogre.jpg'),
+   ('Dinkley', 'Vera', 'veradinkley.jpg'),
+   ('Wayne','Bruce','brucewayne.jpg'),
+   ('Blanc','Michel','michelblanc.jpg'),
+   ('Blanc','Gérard','gerardblanc.jpg'),
+   ('Noir','Michel','michelnoir.jpg'),
+   ('Demonaco','Stephanie','stephaniedemonaco.jpg');
 
 INSERT INTO rattrapage(sujet, date, heure, duree, etat, id_professeur, id_surveillant, id_salle, id_matiere) values
    ('sujet_math.pdf', '2022-10-20', '10:00:00', 120, 'Effectué et noté', 3, 6, 1, 1),
