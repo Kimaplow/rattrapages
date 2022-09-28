@@ -18,6 +18,9 @@ public class Eleve implements Serializable {
     @SerializedName("photo")
     private String photo;
 
+    @SerializedName("present")
+    private boolean present;
+
     public long getIdEleve() {
         return idEleve;
     }
@@ -32,5 +35,9 @@ public class Eleve implements Serializable {
 
     public String getPhoto() {
         return photo;
+    }
+
+    public boolean isPresent() {
+        return present;
     }
 }

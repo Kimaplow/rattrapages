@@ -20,7 +20,7 @@ public interface WebServiceInterface {
     Call<Rattrapage[]> getRattrapages(@Path("id") long id);
 
     @GET("convocations/rattrapage/{id}/eleves")
-    Call<Eleve[]> getEleves(@Path("id") long id);
+    Call<Convocation[]> getEleves(@Path("id") long id);
 
     @POST("personnes/login")
     Call<Personne> connexion(@Body PostPersonne p);

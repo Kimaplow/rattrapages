@@ -1,5 +1,6 @@
 package fr.epsi.appandroidrattrapage;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import fr.epsi.appandroidrattrapage.entity.Convocation;
 import fr.epsi.appandroidrattrapage.entity.Eleve;
 
 public class EleveAdapter extends RecyclerView.Adapter<EleveHolder> {
 
-    private Eleve[] listEleves;
+    private Convocation[] listEleves;
     private OnClickButtonEleveListener listener;
-    private long idRattrapage;
 
-    public EleveAdapter(Eleve[] listEleves, OnClickButtonEleveListener listener, long idRattrapage){
+    public EleveAdapter(Convocation[] listEleves, OnClickButtonEleveListener listener){
         this.listEleves = listEleves;
         this.listener = listener;
-        this.idRattrapage = idRattrapage;
     }
 
     @NonNull
@@ -32,16 +32,21 @@ public class EleveAdapter extends RecyclerView.Adapter<EleveHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull EleveHolder holder, int position) {
-        holder.nomEleve.setText(listEleves[position].getNom());
-        holder.prenomEleve.setText(listEleves[position].getPrenom());
-        Picasso.get().load("http://192.168.1.60:8080/photos/scatcat.png").into(holder.photoEleve);
+        holder.nomEleve.setText(listEleves[position].getEleve().getNom());
+        holder.prenomEleve.setText(listEleves[position].getEleve().getPrenom());
+        Picasso.get().load("http://10.60.12.60:8080/photos/scatcat.png").into(holder.photoEleve);
+
+        if(listEleves[position].isPresent()){
+            holder.button.setBackgroundColor(Color.MAGENTA);
+        }
 
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.setElevePresent(idRattrapage, listEleves[position].getIdEleve());
+                listener.setElevePresent(listEleves[position].getKey().getIdRattrapage(), listEleves[position].getKey().getIdEleve());
             }
         });
+
     }
 
     @Override

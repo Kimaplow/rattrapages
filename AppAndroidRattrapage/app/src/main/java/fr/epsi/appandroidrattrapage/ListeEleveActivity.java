@@ -1,10 +1,17 @@
 package fr.epsi.appandroidrattrapage;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import fr.epsi.appandroidrattrapage.entity.Convocation;
 import fr.epsi.appandroidrattrapage.entity.Eleve;
@@ -35,24 +42,27 @@ public class ListeEleveActivity extends AppCompatActivity implements OnClickButt
         eleveLayoutManager = new LinearLayoutManager(getBaseContext());
         eleveRecyclerView.setLayoutManager(eleveLayoutManager);
 
-        Eleve[] listEleves = {};
+        Convocation[] listEleves = {};
 
-        eleveAdapter = new EleveAdapter(listEleves, listener, idRattrapage);
+        eleveAdapter = new EleveAdapter(listEleves, listener);
         eleveRecyclerView.setAdapter(eleveAdapter);
 
         CallApi callApi = new CallApi();
-        Call<Eleve[]> callEleves = callApi.getEleves(idRattrapage);
-        callEleves.enqueue(new Callback<Eleve[]>() {
+        Call<Convocation[]> callEleves = callApi.getEleves(idRattrapage);
+        callEleves.enqueue(new Callback<Convocation[]>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onResponse(Call<Eleve[]> call, Response<Eleve[]> response) {
+            public void onResponse(Call<Convocation[]> call, Response<Convocation[]> response) {
                 if(response.code() == 200){
-                    eleveAdapter = new EleveAdapter(response.body(), listener, idRattrapage);
+                    List<Convocation> listConvocations = Arrays.asList(response.body());
+                    Collections.sort(listConvocations, Comparator.comparing((Convocation c) -> c.getEleve().getIdEleve()));
+                    eleveAdapter = new EleveAdapter(listConvocations.toArray(new Convocation[listConvocations.size()]), listener);
                     eleveRecyclerView.setAdapter(eleveAdapter);
                 }
             }
 
             @Override
-            public void onFailure(Call<Eleve[]> call, Throwable t) {
+            public void onFailure(Call<Convocation[]> call, Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
@@ -66,7 +76,7 @@ public class ListeEleveActivity extends AppCompatActivity implements OnClickButt
             @Override
             public void onResponse(Call<Convocation> call, Response<Convocation> response) {
                 if(response.code() == 200){
-                    //truc
+                    recreate();
                 }
             }
 

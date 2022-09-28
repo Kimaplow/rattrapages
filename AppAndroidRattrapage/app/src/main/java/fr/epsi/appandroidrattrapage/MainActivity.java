@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 import fr.epsi.appandroidrattrapage.entity.Personne;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,18 +44,21 @@ public class MainActivity extends AppCompatActivity {
             callPersonne.enqueue(new Callback<Personne>() {
                 @Override
                 public void onResponse(Call<Personne> call, Response<Personne> response) {
-                    System.out.println(response.code());
-                    if(response.code() == 200){
-                        message.setText("Connecté !");
-                        navigationToListRattrapage.putExtra("personne", response.body());
-                        startActivity(navigationToListRattrapage);
+                    if(response.code() == 200) {
+                        System.out.println(response.body().getRole());
+                        if (Objects.equals(response.body().getRole(), "surveillant")) {
+                            message.setText("Connecté !");
+                            navigationToListRattrapage.putExtra("personne", response.body());
+                            startActivity(navigationToListRattrapage);
+                        } else {
+                            message.setText("Vous n'êtes pas surveillant !");
+                        }
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Personne> call, Throwable t) {
                     message.setText("Erreur lors de la connexion");
-                    System.out.println("NON");
                 }
             });
         }
