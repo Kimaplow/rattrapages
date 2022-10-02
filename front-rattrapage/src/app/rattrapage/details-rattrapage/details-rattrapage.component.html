@@ -1,0 +1,59 @@
+<div *ngIf="rattrapage" class="container text-center m-auto">
+    <h1>Rattrapage n°{{ rattrapage.idRattrapage }}</h1>
+    <div class="mt-5">
+        <p><strong>Date & heure : </strong>{{ rattrapage.date }} - {{rattrapage.heure}}</p>
+        <p><strong>Salle : </strong>{{ rattrapage.salle.nom }}</p>
+        <p><strong>Matière : </strong>{{ rattrapage.matiere.code }} - {{rattrapage.matiere.libelle}}</p>
+        <p><strong>Professeur : </strong>{{ rattrapage.professeur.prenom }} {{rattrapage.professeur.nom}}</p>
+        <p><strong>Surveillant : </strong>{{ rattrapage.surveillant.prenom }} {{rattrapage.surveillant.nom}}</p>
+    </div>
+
+    <div class="mt-5">
+        <h4 class="mb-3">Elèves convoqués : </h4>
+        <div *ngIf="convocations">
+            <p>
+                <button *ngIf="user.role === 'professeur'" class="btn btn-primary" [disabled]="(rattrapage.etat === 'Effectué et noté') || (convocations | disabled)"
+                (click)="setEtatRattrapage(rattrapage.idRattrapage)">Marquer comme effectué et noté</button>
+
+                <button *ngIf="user.role === 'surveillant'" class="btn btn-primary" [disabled]="(rattrapage.etat !== 'Non effectué')"
+                (click)="setEtatRattrapage(rattrapage.idRattrapage)">Marquer comme effectué mais non noté</button>
+            </p>
+            <div *ngFor="let c of convocations" class="card mb-3 w-50 m-auto">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ urlPhoto + c.eleve.photo }}" class="img-photo rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ c.eleve.prenom }} {{ c.eleve.nom }}</h5>
+                            <p class="card-text mt-3">
+                                <button class="btn btn-primary"
+                                    [disabled]="user.role !== 'surveillant' || c.rattrapage.etat !== 'Non effectué'">Présent</button>
+                            </p>
+                            <p [hidden]="c.present === false || c.note > 0 ||!(noteForm.value.note === '')">Entrer une note svp</p>
+                            <form class="card-text" #noteForm="ngForm" (ngSubmit)="noteEleve(c.id.idEleve, c.id.idRattrapage, noteForm.value)">
+                                <button type="submit" class="btn btn-primary" [disabled]="user.role !== 'professeur' || c.present === false || c.rattrapage.etat === 'Non effectué'">Noter</button>
+                                <input class="col-md-4 ms-2" id="note" name="note" type="number" step="0.5" max="20" min="1" ngModel
+                                [disabled]="user.role !== 'professeur' || c.present === false || c.rattrapage.etat === 'Non effectué' ">
+                                (note actuelle : {{ c.note }})
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!convocations">
+            Pas encore d'élèves convoqués...
+        </div>
+    </div>
+
+    <div>
+        <button class="btn btn-danger my-5" (click)="goToRattrapages()">Retour aux rattrapages</button>
+    </div>
+
+</div>
+
+<div *ngIf="!rattrapage" class="container text-center m-auto">
+    <p>Rattrapage non trouvé...</p>
+    <button class="btn btn-primary" (click)="goToRattrapages()">Retour aux rattrapages</button>
+</div>

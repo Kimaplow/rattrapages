@@ -1,0 +1,26 @@
+<h1 class="text-center">Rattrapage</h1>
+
+<table class="table table-bordered text-center w-50 m-auto mt-5">
+    <thead>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Durée</th>
+        <th>Etat</th>
+        <th>Sujet</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let r of rattrapages" class="{{r.etat === 'Non effectué' ? 'table-success' : r.etat === 'Effectué mais non noté' ? 'table-warning' : 'table-secondary'}}">
+            <td>{{ r.date }}</td>
+            <td>{{ r.heure }}</td>
+            <td>{{ r.duree }} min</td>
+            <td>{{ r.etat }}</td>
+            <td><a href="{{ urlPdf + r.sujet }}" target="_blank" rel="noopener noreferrer">{{ r.sujet }}</a></td>
+            <td><button class="btn btn-primary" [disabled]="user.role !== 'responsable' && r.etat === 'Effectué et noté'" (click)="goToDetailRattrapage(r.idRattrapage)">Consulter</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="user.role == 'reponsable'" class="d-flex justify-content-center m-auto mt-3">
+    <button class="btn btn-primary">Créer un rattrapage</button>
+</div>
