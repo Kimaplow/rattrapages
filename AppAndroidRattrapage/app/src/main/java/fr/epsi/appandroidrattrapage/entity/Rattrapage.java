@@ -11,8 +11,8 @@ public class Rattrapage implements Serializable {
     @SerializedName("idRattrapage")
     private long idRattrapage;
 
-    @SerializedName("sujet")
-    private String sujet;
+    @SerializedName("etat")
+    private String etat;
 
     @SerializedName("date")
     private String date;
@@ -36,8 +36,12 @@ public class Rattrapage implements Serializable {
         return idRattrapage;
     }
 
-    public String getSujet() {
-        return sujet;
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 
     public String getDate() {

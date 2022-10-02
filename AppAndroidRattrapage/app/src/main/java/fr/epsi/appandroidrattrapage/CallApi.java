@@ -13,6 +13,7 @@ import javax.net.ssl.X509TrustManager;
 
 import fr.epsi.appandroidrattrapage.entity.Convocation;
 import fr.epsi.appandroidrattrapage.entity.Eleve;
+import fr.epsi.appandroidrattrapage.entity.PatchRattrapage;
 import fr.epsi.appandroidrattrapage.entity.Personne;
 import fr.epsi.appandroidrattrapage.entity.PostPersonne;
 import fr.epsi.appandroidrattrapage.entity.Rattrapage;
@@ -46,6 +47,10 @@ public class CallApi {
 
     public Call<Convocation> setElevePresent(long idRattrapage, long idEleve){
         return webServiceInterface.setElevePresent(idRattrapage, idEleve);
+    }
+
+    public Call<Rattrapage> setRattrapageEffectue(long idRattrapage){
+        return webServiceInterface.setRattrapageEffectue(idRattrapage, new PatchRattrapage("Effectué mais non noté"));
     }
 
 

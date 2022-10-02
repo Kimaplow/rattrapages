@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Personne> call, Response<Personne> response) {
                     if(response.code() == 200) {
-                        System.out.println(response.body().getRole());
                         if (Objects.equals(response.body().getRole(), "surveillant")) {
                             message.setText("Connecté !");
                             navigationToListRattrapage.putExtra("personne", response.body());

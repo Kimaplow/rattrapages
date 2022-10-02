@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 import fr.epsi.appandroidrattrapage.entity.Convocation;
 import fr.epsi.appandroidrattrapage.entity.Eleve;
+import fr.epsi.appandroidrattrapage.entity.PatchRattrapage;
 import fr.epsi.appandroidrattrapage.entity.Personne;
 import fr.epsi.appandroidrattrapage.entity.PostPersonne;
 import fr.epsi.appandroidrattrapage.entity.Rattrapage;
@@ -28,5 +29,8 @@ public interface WebServiceInterface {
     @PATCH("convocations/rattrapage/{idRattrapage}/eleve/{idEleve}/present")
     Call<Convocation> setElevePresent(@Path("idRattrapage") long idRattrapage,
                                       @Path("idEleve") long idEleve);
+
+    @PATCH("rattrapages/{id}/etat")
+    Call<Rattrapage> setRattrapageEffectue(@Path("id") long idRattrapage, @Body PatchRattrapage r);
 
 }

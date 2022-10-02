@@ -147,13 +147,13 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonChronoShowRattrapage" />
 
     <Button
-        android:id="@+id/buttonSujetShowRattrapage"
+        android:id="@+id/buttonEffectueShowRattrapage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/magenta_fonce"
         android:onClick="clickButtonSujet"
-        android:text="Voir le sujet"
+        android:text="Marquer comme effectué"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />

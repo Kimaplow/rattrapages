@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 import fr.epsi.appandroidrattrapage.entity.Eleve;
 import fr.epsi.appandroidrattrapage.entity.Rattrapage;
@@ -60,7 +63,11 @@ public class ShowRattrapageActivity extends AppCompatActivity {
             tempsRestantShowRattrapage.setText("Temps restant : 0" + heure + ":00:00");
         }
 
-        //todo ajouter le nombre d'élèves
+
+        if(!Objects.equals(rattrapage.getEtat(), "Non effectué")){
+            Button btnEffectue = findViewById(R.id.buttonEffectueShowRattrapage);
+            btnEffectue.setEnabled(false);
+        }
 
     }
 
@@ -76,7 +83,24 @@ public class ShowRattrapageActivity extends AppCompatActivity {
     }
 
     public void clickButtonSujet(View v){
+        Rattrapage rattrapage = (Rattrapage) getIntent().getSerializableExtra("rattrapage");
+        CallApi callApi = new CallApi();
+        Call<Rattrapage> callRattrapage = callApi.setRattrapageEffectue(rattrapage.getIdRattrapage());
+        callRattrapage.enqueue(new Callback<Rattrapage>() {
+            @Override
+            public void onResponse(Call<Rattrapage> call, Response<Rattrapage> response) {
+                if(response.code() == 200){
+                    Button btnEffectue = findViewById(R.id.buttonEffectueShowRattrapage);
+                    btnEffectue.setEnabled(false);
+                    rattrapage.setEtat("Effectué mais non noté");
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Rattrapage> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
     }
 
 
