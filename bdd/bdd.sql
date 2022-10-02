@@ -69,7 +69,7 @@ INSERT INTO personne(nom, prenom, mail, password, role) values
    ('Bloom', 'Léon', 'leon.bloom@ispe.fr', 'Leon', 'responsable'),
    ('Giscard d''Estaing', 'Valéry', 'valery.giscard@ispe.fr', 'valery', 'professeur'),
    ('Chirac', 'Jacques', 'jacques.chirac@ispe.fr', 'jacques', 'professeur'),
-   ('Jospin', 'Lionel','lionel.jospin@ispe.fr','lionnel', 'professeur'),
+   ('Jospin', 'Lionel','lionel.jospin@ispe.fr','lionel', 'professeur'),
    ('De Gaulle', 'Charles', 'charles.degaulle@ispe.fr', 'charles', 'surveillant'),
    ('Pompidou', 'Georges', 'georges.pompidou@ispe.fr', 'georges', 'surveillant'),
    ('Cresson', 'Edith', 'edith.cresson@ispe.fr', 'edith', 'surveillant');
