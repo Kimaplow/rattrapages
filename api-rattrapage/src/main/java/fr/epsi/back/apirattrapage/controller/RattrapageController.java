@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/v1/rattrapages")
 public class RattrapageController {
@@ -90,10 +91,10 @@ public class RattrapageController {
         return rattrapageRepository.save(r);
     }
 
-    @PatchMapping("/{id}/{etat}")
-    public Rattrapage patchEtatRattrapage(@PathVariable long id, @PathVariable String etat){
+    @PatchMapping("/{id}/etat")
+    public Rattrapage patchEtatRattrapage(@PathVariable long id, @RequestBody Rattrapage rattrapage){
         Rattrapage r = rattrapageRepository.findById(id).get();
-        r.setEtat(etat);
+        r.setEtat(rattrapage.getEtat());
         return rattrapageRepository.save(r);
     }
 

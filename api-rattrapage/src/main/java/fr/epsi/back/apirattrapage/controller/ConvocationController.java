@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/v1/convocations")
 public class ConvocationController {
