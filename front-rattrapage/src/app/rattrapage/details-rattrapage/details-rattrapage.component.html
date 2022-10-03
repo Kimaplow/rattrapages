@@ -28,7 +28,7 @@
                             <h5 class="card-title">{{ c.eleve.prenom }} {{ c.eleve.nom }}</h5>
                             <p class="card-text mt-3">
                                 <button class="btn btn-primary"
-                                    [disabled]="user.role !== 'surveillant' || c.rattrapage.etat !== 'Non effectué'">Présent</button>
+                                    [disabled]="user.role !== 'surveillant' || c.rattrapage.etat !== 'Non effectué' || c.present" (click)="setPresent(c.id.idEleve, c.id.idRattrapage)">Présent</button>
                             </p>
                             <p [hidden]="c.present === false || c.note > 0 ||!(noteForm.value.note === '')">Entrer une note svp</p>
                             <form class="card-text" #noteForm="ngForm" (ngSubmit)="noteEleve(c.id.idEleve, c.id.idRattrapage, noteForm.value)">

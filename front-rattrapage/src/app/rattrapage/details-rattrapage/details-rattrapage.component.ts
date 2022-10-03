@@ -67,4 +67,13 @@ export class DetailsRattrapageComponent implements OnInit {
     }, 100);
   }
 
+  setPresent(idEleve: number, idRattrapage: number){
+    console.log(idEleve);
+    console.log(idRattrapage);
+    this.rattrapageService.setElevePresent(idEleve, idRattrapage).subscribe();
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  }
+
 }

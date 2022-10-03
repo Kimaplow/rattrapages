@@ -87,7 +87,16 @@ export class RattrapageService {
         return of()
       })
     )
+  }
 
+  setElevePresent(idEleve: number, idRattrapage: number){
+    return this.http.patch<Convocation>(baseUrl + "convocations/rattrapage/" + idRattrapage + "/eleve/" + idEleve + "/present", {}).pipe(
+      tap(),
+      catchError(error => {
+        console.error(error);
+        return of([])
+      })
+    )
   }
 
 }
