@@ -20,6 +20,9 @@ public interface WebServiceInterface {
     @GET("rattrapages/surveillant/{id}/restant")
     Call<Rattrapage[]> getRattrapages(@Path("id") long id);
 
+    @GET("rattrapages/{id}")
+    Call<Rattrapage> getRattrapage(@Path("id") long id);
+
     @GET("convocations/rattrapage/{id}/eleves")
     Call<Convocation[]> getEleves(@Path("id") long id);
 

@@ -63,7 +63,7 @@ public class ListeRattrapageActivity extends AppCompatActivity implements OnClic
     @Override
     public void showRattrapage(Rattrapage rattrapage) {
         Intent navigationToShowRattrapage = new Intent(this, ShowRattrapageActivity.class);
-        navigationToShowRattrapage.putExtra("rattrapage", rattrapage);
+        navigationToShowRattrapage.putExtra("rattrapage", rattrapage.getIdRattrapage());
         startActivity(navigationToShowRattrapage);
     }
 }

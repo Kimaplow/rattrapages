@@ -23,58 +23,78 @@ public class ShowRattrapageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_rattrapage);
 
-        Rattrapage rattrapage = (Rattrapage) getIntent().getSerializableExtra("rattrapage");
+        long idRattrapage = getIntent().getExtras().getLong("rattrapage");
 
-        TextView titleShowRattrapage = findViewById(R.id.titleShowRattrapage);
-        TextView matiereShowRattrapage = findViewById(R.id.matiereShowRattrapage);
-        TextView profSalleShowRattrapage = findViewById(R.id.profSalleShowRattrapage);
-        TextView dateHeureShowRattrapage = findViewById(R.id.dateHeureShowRattrapage);
-        TextView dureeShowRattrapage = findViewById(R.id.dureeShowRattrapage);
-        TextView nbrEleveShowRattrapage = findViewById(R.id.nbrEleveShowRattrapage);
-        TextView tempsRestantShowRattrapage = findViewById(R.id.tempsRestantShowRattrapage);
+        final Rattrapage[] rattrapage = new Rattrapage[1];
 
-        titleShowRattrapage.setText(new StringBuilder().append("Rattrapage n°")
-                .append(rattrapage.getIdRattrapage()).toString());
+        CallApi callApi = new CallApi();
+        Call<Rattrapage> callRattrapage = callApi.getRattrapage(idRattrapage);
 
-        matiereShowRattrapage.setText(new StringBuilder().append(rattrapage.getMatiere().getCode())
-                .append(" - ")
-                .append(rattrapage.getMatiere().getLibelle()).toString());
+        callRattrapage.enqueue(new Callback<Rattrapage>() {
+            @Override
+            public void onResponse(Call<Rattrapage> call, Response<Rattrapage> response) {
+                if(response.code() == 200){
+                    rattrapage[0] = response.body();
 
-        profSalleShowRattrapage.setText(new StringBuilder().append(rattrapage.getPersonne().getPrenom())
-                .append(" ")
-                .append(rattrapage.getPersonne().getNom())
-                .append(" - Salle ")
-                .append(rattrapage.getSalle().getNom()));
+                    TextView titleShowRattrapage = findViewById(R.id.titleShowRattrapage);
+                    TextView matiereShowRattrapage = findViewById(R.id.matiereShowRattrapage);
+                    TextView profSalleShowRattrapage = findViewById(R.id.profSalleShowRattrapage);
+                    TextView dateHeureShowRattrapage = findViewById(R.id.dateHeureShowRattrapage);
+                    TextView dureeShowRattrapage = findViewById(R.id.dureeShowRattrapage);
+                    TextView nbrEleveShowRattrapage = findViewById(R.id.nbrEleveShowRattrapage);
+                    TextView tempsRestantShowRattrapage = findViewById(R.id.tempsRestantShowRattrapage);
 
-        dateHeureShowRattrapage.setText(new StringBuilder().append(rattrapage.getDate().substring(8,10))
-                .append("/")
-                .append(rattrapage.getDate().substring(5,7))
-                .append(" - ")
-                .append(rattrapage.getHeure().substring(0, 5)));
+                    titleShowRattrapage.setText(new StringBuilder().append("Rattrapage n°")
+                            .append(rattrapage[0].getIdRattrapage()).toString());
 
-        int heure = rattrapage.getDuree() / 60;
-        int min = rattrapage.getDuree() - (60*heure);
-        if(min != 0){
-            dureeShowRattrapage.setText(heure + "h" + min);
-            tempsRestantShowRattrapage.setText("Temps restant : 0" + heure + ":" + min + "00");
-        }
-        else{
-            dureeShowRattrapage.setText(heure + "h");
-            tempsRestantShowRattrapage.setText("Temps restant : 0" + heure + ":00:00");
-        }
+                    matiereShowRattrapage.setText(new StringBuilder().append(rattrapage[0].getMatiere().getCode())
+                            .append(" - ")
+                            .append(rattrapage[0].getMatiere().getLibelle()).toString());
+
+                    profSalleShowRattrapage.setText(new StringBuilder().append(rattrapage[0].getPersonne().getPrenom())
+                            .append(" ")
+                            .append(rattrapage[0].getPersonne().getNom())
+                            .append(" - Salle ")
+                            .append(rattrapage[0].getSalle().getNom()));
+
+                    dateHeureShowRattrapage.setText(new StringBuilder().append(rattrapage[0].getDate().substring(8,10))
+                            .append("/")
+                            .append(rattrapage[0].getDate().substring(5,7))
+                            .append(" - ")
+                            .append(rattrapage[0].getHeure().substring(0, 5)));
+
+                    int heure = rattrapage[0].getDuree() / 60;
+                    int min = rattrapage[0].getDuree() - (60*heure);
+                    if(min != 0){
+                        dureeShowRattrapage.setText(heure + "h" + min);
+                        tempsRestantShowRattrapage.setText("Temps restant : 0" + heure + ":" + min + "00");
+                    }
+                    else{
+                        dureeShowRattrapage.setText(heure + "h");
+                        tempsRestantShowRattrapage.setText("Temps restant : 0" + heure + ":00:00");
+                    }
 
 
-        if(!Objects.equals(rattrapage.getEtat(), "Non effectué")){
-            Button btnEffectue = findViewById(R.id.buttonEffectueShowRattrapage);
-            btnEffectue.setEnabled(false);
-        }
+                    if(!Objects.equals(rattrapage[0].getEtat(), "Non effectué")){
+                        Button btnEffectue = findViewById(R.id.buttonEffectueShowRattrapage);
+                        btnEffectue.setEnabled(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Rattrapage> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
 
     }
 
     public void clickButtonEleve(View v){
         Intent navigationToListEleve = new Intent(this, ListeEleveActivity.class);
-        Rattrapage rattrapage = (Rattrapage) getIntent().getSerializableExtra("rattrapage");
-        navigationToListEleve.putExtra("idRattrapage", rattrapage.getIdRattrapage());
+        //Rattrapage rattrapage = (Rattrapage) getIntent().getSerializableExtra("rattrapage");
+        long idRattrapage = getIntent().getExtras().getLong("rattrapage");
+        navigationToListEleve.putExtra("idRattrapage", idRattrapage);
         startActivity(navigationToListEleve);
     }
 
@@ -83,16 +103,15 @@ public class ShowRattrapageActivity extends AppCompatActivity {
     }
 
     public void clickButtonSujet(View v){
-        Rattrapage rattrapage = (Rattrapage) getIntent().getSerializableExtra("rattrapage");
+        long idRattrapage = getIntent().getExtras().getLong("rattrapage");
         CallApi callApi = new CallApi();
-        Call<Rattrapage> callRattrapage = callApi.setRattrapageEffectue(rattrapage.getIdRattrapage());
+        Call<Rattrapage> callRattrapage = callApi.setRattrapageEffectue(idRattrapage);
         callRattrapage.enqueue(new Callback<Rattrapage>() {
             @Override
             public void onResponse(Call<Rattrapage> call, Response<Rattrapage> response) {
                 if(response.code() == 200){
                     Button btnEffectue = findViewById(R.id.buttonEffectueShowRattrapage);
                     btnEffectue.setEnabled(false);
-                    rattrapage.setEtat("Effectué mais non noté");
                 }
             }
 
@@ -102,6 +121,8 @@ public class ShowRattrapageActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 

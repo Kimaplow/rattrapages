@@ -24,8 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CallApi {
 
-    //192.168.1.60
-    private static final String baseUrl = "http://192.168.1.60:8080/v1/";
+    private static final String baseUrl = "http://10.60.12.44:8080/v1/";
     private static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -53,5 +52,8 @@ public class CallApi {
         return webServiceInterface.setRattrapageEffectue(idRattrapage, new PatchRattrapage("Effectué mais non noté"));
     }
 
+    public Call<Rattrapage> getRattrapage(long idRattrapage){
+        return webServiceInterface.getRattrapage(idRattrapage);
+    }
 
 }
