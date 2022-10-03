@@ -5,6 +5,7 @@ import { RattrapageComponent } from './rattrapage/rattrapage.component';
 import { DetailsRattrapageComponent } from './details-rattrapage/details-rattrapage.component';
 import { FormsModule } from '@angular/forms';
 import { DisabledPipe } from './disabled.pipe';
+import { FormRattrapageComponent } from './form-rattrapage/form-rattrapage.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'rattrapages/:id',
     component: DetailsRattrapageComponent
+  },
+  {
+    path: 'rattrapages/new',
+    component: FormRattrapageComponent
   }
 ]
 
@@ -21,7 +26,8 @@ const routes: Routes = [
   declarations: [
     RattrapageComponent,
     DetailsRattrapageComponent,
-    DisabledPipe
+    DisabledPipe,
+    FormRattrapageComponent
   ],
   imports: [
     CommonModule,

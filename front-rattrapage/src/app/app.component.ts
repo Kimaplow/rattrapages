@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,26 +7,28 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  navbar: boolean;
+  constructor(private router: Router) { }
 
-  constructor(private router: Router){}
+  ngOnInit() {
 
-  ngOnInit(){
-    setTimeout(() => {
-      let u = localStorage.getItem("user");
-      console.log(u);
-      
-      if (u == null && u == "undefined") {
-        this.navbar = true
-      }
-      else{
-        this.navbar = false;
-      }
-      console.log(this.navbar);
-    }, 200);
-    
+  }
 
-    
+  logout() {
+    localStorage.removeItem("user");
+    localStorage.clear();
+    this.router.navigate([''])
+  }
+
+  clickRattrapages(){
+    this.router.navigate(['rattrapages'])
+  }
+
+  clickProfesseurs(){
+    //this.router.navigate(['professeurs'])
+  }
+
+  clickEleves(){
+    //this.router.navigate(['eleves'])
   }
 
 }

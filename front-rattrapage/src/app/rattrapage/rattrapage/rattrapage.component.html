@@ -21,6 +21,6 @@
     </tbody>
 </table>
 
-<div *ngIf="user.role == 'reponsable'" class="d-flex justify-content-center m-auto mt-3">
+<div *ngIf="user && user.role == 'reponsable'" class="d-flex justify-content-center m-auto mt-3">
     <button class="btn btn-primary">Créer un rattrapage</button>
 </div>
