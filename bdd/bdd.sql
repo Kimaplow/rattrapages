@@ -66,7 +66,7 @@ CREATE TABLE convocation(
 
 INSERT INTO personne(nom, prenom, mail, password, role) values 
    ('Mitterrand', 'François', 'francois.mitterand@ispe.fr', 'francois', 'responsable'),
-   ('Bloom', 'Léon', 'leon.bloom@ispe.fr', 'Leon', 'responsable'),
+   ('Bloom', 'Léon', 'leon.bloom@ispe.fr', 'leon', 'responsable'),
    ('Giscard d''Estaing', 'Valéry', 'valery.giscard@ispe.fr', 'valery', 'professeur'),
    ('Chirac', 'Jacques', 'jacques.chirac@ispe.fr', 'jacques', 'professeur'),
    ('Jospin', 'Lionel','lionel.jospin@ispe.fr','lionel', 'professeur'),
