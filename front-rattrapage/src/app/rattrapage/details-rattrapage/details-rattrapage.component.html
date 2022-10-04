@@ -12,7 +12,7 @@
         <h4 class="mb-3">Elèves convoqués : </h4>
         <div *ngIf="convocations">
             <p>
-                <button *ngIf="user.role === 'professeur'" class="btn btn-primary" [disabled]="(rattrapage.etat === 'Effectué et noté') || (convocations | disabled)"
+                <button *ngIf="user.role === 'professeur'" class="btn btn-primary" [disabled]="(rattrapage.etat !== 'Effectué mais non noté') || (convocations | disabled)"
                 (click)="setEtatRattrapage(rattrapage.idRattrapage)">Marquer comme effectué et noté</button>
 
                 <button *ngIf="user.role === 'surveillant'" class="btn btn-primary" [disabled]="(rattrapage.etat !== 'Non effectué')"

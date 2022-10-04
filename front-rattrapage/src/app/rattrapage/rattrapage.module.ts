@@ -13,12 +13,12 @@ const routes: Routes = [
     component: RattrapageComponent
   },
   {
-    path: 'rattrapages/:id',
-    component: DetailsRattrapageComponent
-  },
-  {
     path: 'rattrapages/new',
     component: FormRattrapageComponent
+  },
+  {
+    path: 'rattrapages/:id',
+    component: DetailsRattrapageComponent
   }
 ]
 

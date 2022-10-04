@@ -1,6 +1,10 @@
 <h1 class="text-center">Rattrapage</h1>
 
-<table class="table table-bordered text-center w-50 m-auto mt-5">
+<div *ngIf="user && user.role == 'responsable'" class="d-flex justify-content-center m-auto my-3">
+    <button class="btn btn-primary" (click)="goToNewRattrapage()">Créer un rattrapage</button>
+</div>
+
+<table class="table table-bordered text-center w-50 m-auto">
     <thead>
         <th>Date</th>
         <th>Heure</th>
@@ -20,7 +24,3 @@
         </tr>
     </tbody>
 </table>
-
-<div *ngIf="user && user.role == 'reponsable'" class="d-flex justify-content-center m-auto mt-3">
-    <button class="btn btn-primary">Créer un rattrapage</button>
-</div>

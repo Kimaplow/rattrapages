@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { baseUrlPdf } from "src/app/app.component";
 import { Personne } from "src/app/classes/Personne";
 import { Rattrapage } from "src/app/classes/Rattrapage";
+import { Salle } from "src/app/classes/Salle";
 import { RattrapageService } from "../rattrapage.service";
 
 @Component({
@@ -41,6 +42,10 @@ export class RattrapageComponent implements OnInit {
 
   goToDetailRattrapage(id: number) {
     this.router.navigate(['rattrapages', id])
+  }
+
+  goToNewRattrapage(){
+    this.router.navigate(['rattrapages/new'])
   }
 
 }

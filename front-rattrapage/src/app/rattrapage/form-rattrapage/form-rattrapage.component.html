@@ -1,0 +1,70 @@
+<div class='d-flex justify-content-center'>
+
+    <form #ratFrom="ngForm" (ngSubmit)="onSubmit(ratFrom.value)" ngNativeValidate>
+
+        <h1 class='text-center m-auto mt-3'>Créer un rattrapage</h1>
+
+        <div class="form-group div-btn-form mt-5">
+
+            <label class="mt-2 fw-bold" for="date">Date</label>
+            <input required type="date" class="form-control" name="date" ngModel />
+
+            <label class="mt-3 fw-bold" for="time">Heure</label>
+            <input required type="time" class="form-control" name="time" ngModel />
+
+            <label class="mt-3 fw-bold" for="duree">Durée</label>
+            <input required type="number" min="60" max="240" class="form-control" name="duree" ngModel/>
+
+            <label class="mt-3 fw-bold" for="salle">Salle</label>
+            <select name="salle" class="form-control text-center" ngModel>
+                <option value="">--Choisissez une salle svp--</option>
+                <option *ngFor="let salle of listSalles" value="{{salle.idSalle}}">Salle {{salle.nom}}</option>
+            </select>
+
+            <label class="mt-3 fw-bold" for="matiere">Matiere</label>
+            <select name="matiere" class="form-control text-center" ngModel>
+                <option value="">--Choisissez une matière svp--</option>
+                <option *ngFor="let matiere of listMatiere" value="{{matiere.idMatiere}}">{{matiere.libelle}}</option>
+            </select>
+
+            <label class="mt-3 fw-bold" for="file">Fichier pdf</label>
+            <input required type="file" class="form-control" name="file" accept="application/pdf" ngModel />
+
+            <label class="mt-3 fw-bold" for="professeur">Professeur</label>
+            <select name="professeur" class="form-control text-center" ngModel>
+                <option value="">--Choisissez un professeur svp--</option>
+                <option *ngFor="let professeur of listProfesseurs" value="{{professeur.idPersonne}}">
+                    {{professeur.prenom}} {{professeur.nom}}</option>
+            </select>
+
+            <label class="mt-3 fw-bold" for="surveillant">Surveillant</label>
+            <select name="surveillant" class="form-control text-center" ngModel>
+                <option value="">--Choisissez un surveillant svp--</option>
+                <option *ngFor="let surveillant of listSurveillant" value="{{surveillant.idPersonne}}">
+                    {{surveillant.prenom}} {{surveillant.nom}}</option>
+            </select>
+
+            <label class="mt-3 fw-bold" for="nbrEleve">Nombre d'élèves</label>
+            <input required type="number" class="form-control" min="1" name="nbrEleve" ngModel />
+
+            <div *ngIf="ratFrom.value.nbrEleve > 0">
+                <div *ngFor="let e of [].constructor(ratFrom.value.nbrEleve); let i = index">
+                    <label class="mt-3 fw-bold" for="eleve{{i+1}}">Eleve {{i+1}}</label>
+                    <select name="eleve{{i+1}}"
+                        class="form-control text-center" ngModel>
+                        <option value="">--Choisissez un élève svp--</option>
+                        <option *ngFor="let eleve of listEleves" value="{{eleve.idEleve}}">{{eleve.prenom}}
+                            {{eleve.nom}}</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-flex mt-4">
+            <button type="submit" class="btn btn-primary m-auto mb-5">Créer le rattrapage</button>
+        </div>
+
+    </form>
+
+</div>

@@ -3,8 +3,11 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { baseUrl } from '../app.component';
 import { Convocation } from '../classes/Convocation';
+import { Eleve } from '../classes/Eleve';
+import { Matiere } from '../classes/Matiere';
 import { Personne } from '../classes/Personne';
 import { Rattrapage } from '../classes/Rattrapage';
+import { Salle } from '../classes/Salle';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +98,56 @@ export class RattrapageService {
       catchError(error => {
         console.error(error);
         return of([])
+      })
+    )
+  }
+
+  getAllSalles(){
+    return this.http.get<Salle[]>(baseUrl + "salles").pipe(
+      tap(),
+      catchError(error => {
+        console.error(error);
+        return of([])
+      })
+    )
+  }
+
+  getAllMatieres(){
+    return this.http.get<Matiere[]>(baseUrl + "matieres").pipe(
+      tap(),
+      catchError(error => {
+        console.error(error);
+        return of([])
+      })
+    )
+  }
+
+  getAllPersonnesByRole(role: string){
+    return this.http.get<Personne[]>(baseUrl + "personnes/role/" + role).pipe(
+      tap(),
+      catchError(error => {
+        console.error(error);
+        return of([])
+      })
+    )
+  }
+
+  getAllEleve(){
+    return this.http.get<Eleve[]>(baseUrl + "eleves").pipe(
+      tap(),
+      catchError(error => {
+        console.error(error);
+        return of([])
+      })
+    )
+  }
+
+  postRattrapage(data: Object){
+    return this.http.post<Rattrapage>(baseUrl + "rattrapages", data).pipe(
+      tap(),
+      catchError(error => {
+        console.error(error);
+        return of()
       })
     )
   }
