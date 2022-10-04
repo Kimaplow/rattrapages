@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   clickProfesseurs(){
-    //this.router.navigate(['professeurs'])
+    this.router.navigate(['professeurs'])
   }
 
   clickSurveillants(){

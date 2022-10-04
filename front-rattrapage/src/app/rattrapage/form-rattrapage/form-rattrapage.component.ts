@@ -23,6 +23,11 @@ export class FormRattrapageComponent implements OnInit {
   constructor(private rattrapageService: RattrapageService, private router: Router) { }
 
   ngOnInit(): void {
+    let p = localStorage.getItem("user");
+    if (p === null || p === "undefined") {
+      this.router.navigate([""]);
+    }
+    
     this.rattrapageService.getAllSalles().subscribe(
       salles => this.listSalles = salles
     );
@@ -45,14 +50,14 @@ export class FormRattrapageComponent implements OnInit {
 
   }
 
-  onSubmit(data: any){
+  onSubmit(data: any) {
 
     let dataRattrapage = {
       "date": data.date,
       "heure": data.time,
       "duree": data.duree,
-      "professeur" : {
-        "idPersonne" : parseInt(data.professeur)
+      "professeur": {
+        "idPersonne": parseInt(data.professeur)
       },
       "surveillant": {
         "idPersonne": parseInt(data.surveillant)
@@ -64,19 +69,19 @@ export class FormRattrapageComponent implements OnInit {
         "idSalle": parseInt(data.salle)
       }
     };
-    
+
     this.rattrapageService.postRattrapage(dataRattrapage).subscribe(
       rattrapage => {
-        for(let i:number = 1; i <= parseInt(data.nbrEleve); i++){
+        for (let i: number = 1; i <= parseInt(data.nbrEleve); i++) {
           let dataConvoc = {
             "id": {
               "idRattrapage": rattrapage.idRattrapage,
               "idEleve": parseInt(eval(`data.eleve${i}`))
             },
-            "eleve" : {
+            "eleve": {
               "idEleve": parseInt(eval(`data.eleve${i}`))
             },
-            "rattrapage" : {
+            "rattrapage": {
               "idRattrapage": rattrapage.idRattrapage
             }
           };
@@ -89,7 +94,7 @@ export class FormRattrapageComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(['rattrapages'])
     }, 50);
-    
+
   }
 
 }

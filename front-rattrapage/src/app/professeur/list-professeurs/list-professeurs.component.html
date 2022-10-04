@@ -1,0 +1,18 @@
+<h1 class="text-center">Professeurs</h1>
+
+<table class="table table-striped table-bordered text-center w-50 m-auto">
+    <thead>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Mail</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let professeur of listProfesseurs">
+            <td>{{ professeur.nom }}</td>
+            <td>{{ professeur.prenom }}</td>
+            <td>{{ professeur.mail }}</td>
+            <td><button class="btn btn-primary" [disabled]="user.role !== 'responsable'">Modifier</button></td>
+        </tr>
+    </tbody>
+</table>
