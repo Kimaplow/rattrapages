@@ -25,22 +25,22 @@ public class Rattrapage {
 
     private String etat;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_matiere")
     @JsonIgnoreProperties({"rattrapages"})
     private Matiere matiere;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_salle")
     @JsonIgnoreProperties({"rattrapages"})
     private Salle salle;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_professeur")
     @JsonIgnoreProperties({"rattrapagesSurveillant", "rattrapagesProfesseur"})
     private Personne professeur;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_surveillant")
     @JsonIgnoreProperties({"rattrapagesSurveillant", "rattrapagesProfesseur"})
     private Personne surveillant;
