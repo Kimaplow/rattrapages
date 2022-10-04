@@ -58,6 +58,8 @@ public class ConvocationController {
 
     @PostMapping("")
     public Convocation createConvocation(@RequestBody Convocation convocation){
+        convocation.setNote(0);
+        convocation.setPresent(false);
         return convocationRepository.save(convocation);
     }
 

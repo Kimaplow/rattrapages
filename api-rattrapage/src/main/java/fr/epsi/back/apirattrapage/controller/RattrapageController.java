@@ -37,6 +37,7 @@ public class RattrapageController {
 
     @PostMapping("")
     public Rattrapage createRattrapage(@RequestBody Rattrapage rattrapage){
+        rattrapage.setEtat("Non effectué");
         return rattrapageRepository.save(rattrapage);
     }
 
