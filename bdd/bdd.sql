@@ -37,11 +37,11 @@ CREATE TABLE matiere(
 
 CREATE TABLE rattrapage(
    id_rattrapage Serial,
-   sujet VARCHAR(50) NOT NULL,
+   sujet VARCHAR(50),
    date DATE NOT NULL,
    heure TIME CHECK(heure >= TIME '08:00:00' AND heure <= TIME '16:00:00') NOT NULL,
    duree INT CHECK(duree >= 60 AND duree <= 240) NOT NULL,
-   etat VARCHAR(50) NOT NULL DEFAULT 'Non effectué', 
+   etat VARCHAR(50) DEFAULT 'Non effectué', 
    id_professeur INT NOT NULL,
    id_surveillant INT NOT NULL,
    id_salle INT NOT NULL,
@@ -66,10 +66,10 @@ CREATE TABLE convocation(
 
 INSERT INTO personne(nom, prenom, mail, password, role) values 
    ('Mitterrand', 'François', 'francois.mitterand@ispe.fr', 'francois', 'responsable'),
-   ('Bloom', 'Léon', 'leon.bloom@ispe.fr', 'leon', 'responsable'),
+   ('Blum', 'Léon', 'leon.blum@ispe.fr', 'leon', 'responsable'),
    ('Giscard d''Estaing', 'Valéry', 'valery.giscard@ispe.fr', 'valery', 'professeur'),
    ('Chirac', 'Jacques', 'jacques.chirac@ispe.fr', 'jacques', 'professeur'),
-   ('Jospin', 'Lionel','lionel.jospin@ispe.fr','lionel', 'professeur'),
+   ('Jospin', 'Lionel', 'lionel.jospin@ispe.fr', 'lionel', 'professeur'),
    ('De Gaulle', 'Charles', 'charles.degaulle@ispe.fr', 'charles', 'surveillant'),
    ('Pompidou', 'Georges', 'georges.pompidou@ispe.fr', 'georges', 'surveillant'),
    ('Cresson', 'Edith', 'edith.cresson@ispe.fr', 'edith', 'surveillant');
