@@ -152,4 +152,14 @@ export class RattrapageService {
     )
   }
 
+  postConvocation(data: Object){
+    return this.http.post<Convocation>(baseUrl + "convocations", data).pipe(
+      tap(),
+      catchError(error => {
+        console.error(error);
+        return of()
+      })
+    )
+  }
+
 }

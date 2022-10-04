@@ -1,4 +1,6 @@
+import { Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Eleve } from 'src/app/classes/Eleve';
 import { Matiere } from 'src/app/classes/Matiere';
 import { Personne } from 'src/app/classes/Personne';
@@ -18,7 +20,7 @@ export class FormRattrapageComponent implements OnInit {
   listSurveillant: Personne[];
   listEleves: Eleve[];
 
-  constructor(private rattrapageService: RattrapageService) { }
+  constructor(private rattrapageService: RattrapageService, private router: Router) { }
 
   ngOnInit(): void {
     this.rattrapageService.getAllSalles().subscribe(
@@ -44,52 +46,49 @@ export class FormRattrapageComponent implements OnInit {
   }
 
   onSubmit(data: any){
-    /*
-    date: "2022-10-12"
-    duree: 120
-    eleve1: "3"
-    eleve2: "9"
-    eleve3: "11"
-    eleve4: "15"
-    file: "C:\\fakepath\\Compte rendu du 03_10_2022.pdf"
-    matiere: "3"
-    nbrEleve: 4
-    professeur: "3"
-    salle: "1"
-    surveillant: "6"
-    time: "18:52"
-    */
-    console.log(data);
-
-    //Parse id en number
-    //ajouter etat et sujet
 
     let dataRattrapage = {
       "date": data.date,
-      "heure": data.heure,
+      "heure": data.time,
       "duree": data.duree,
       "professeur" : {
-        "idPersonne" : data.professeur
+        "idPersonne" : parseInt(data.professeur)
       },
       "surveillant": {
-        "idPersonne": data.surveillant
+        "idPersonne": parseInt(data.surveillant)
       },
       "matiere": {
-        "idMatiere": data.matiere
+        "idMatiere": parseInt(data.matiere)
       },
       "salle": {
-        "idSalle": data.salle
+        "idSalle": parseInt(data.salle)
       }
     };
-
-    let rat: Rattrapage; 
-
+    
     this.rattrapageService.postRattrapage(dataRattrapage).subscribe(
       rattrapage => {
-        console.log(rattrapage);
-        rat = rattrapage
+        for(let i:number = 1; i <= parseInt(data.nbrEleve); i++){
+          let dataConvoc = {
+            "id": {
+              "idRattrapage": rattrapage.idRattrapage,
+              "idEleve": parseInt(eval(`data.eleve${i}`))
+            },
+            "eleve" : {
+              "idEleve": parseInt(eval(`data.eleve${i}`))
+            },
+            "rattrapage" : {
+              "idRattrapage": rattrapage.idRattrapage
+            }
+          };
+          console.log(dataConvoc);
+          this.rattrapageService.postConvocation(dataConvoc).subscribe()
+        }
       }
     )
+
+    setTimeout(() => {
+      this.router.navigate(['rattrapages'])
+    }, 50);
     
   }
 
