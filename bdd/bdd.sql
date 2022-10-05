@@ -47,10 +47,10 @@ CREATE TABLE rattrapage(
    id_salle INT NOT NULL,
    id_matiere INT NOT NULL,
    PRIMARY KEY(id_rattrapage),
-   FOREIGN KEY(id_professeur) REFERENCES Personne(id_personne),
-   FOREIGN KEY(id_surveillant) REFERENCES Personne(id_personne),
-   FOREIGN KEY(id_salle) REFERENCES Salle(id_salle),
-   FOREIGN KEY(id_matiere) REFERENCES Matiere(id_matiere)
+   FOREIGN KEY(id_professeur) REFERENCES Personne(id_personne) ON DELETE CASCADE,
+   FOREIGN KEY(id_surveillant) REFERENCES Personne(id_personne) ON DELETE CASCADE,
+   FOREIGN KEY(id_salle) REFERENCES Salle(id_salle) ON DELETE CASCADE,
+   FOREIGN KEY(id_matiere) REFERENCES Matiere(id_matiere) ON DELETE CASCADE
 );
 
 CREATE TABLE convocation(
@@ -60,8 +60,8 @@ CREATE TABLE convocation(
    present Boolean NOT NULL DEFAULT false,
    heure_rendu TIME DEFAULT NULL,
    PRIMARY KEY(id_eleve, id_rattrapage),
-   FOREIGN KEY(id_eleve) REFERENCES Eleve(id_eleve),
-   FOREIGN KEY(id_rattrapage) REFERENCES Rattrapage(id_rattrapage)
+   FOREIGN KEY(id_eleve) REFERENCES Eleve(id_eleve) ON DELETE CASCADE,
+   FOREIGN KEY(id_rattrapage) REFERENCES Rattrapage(id_rattrapage) ON DELETE CASCADE
 );
 
 INSERT INTO personne(nom, prenom, mail, password, role) values 
