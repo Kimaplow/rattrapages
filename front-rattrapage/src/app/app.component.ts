@@ -28,11 +28,11 @@ export class AppComponent implements OnInit {
   }
 
   clickSurveillants(){
-    //this.router.navigate(['surveillants'])
+    this.router.navigate(['surveillants'])
   }
 
   clickEleves(){
-    //this.router.navigate(['eleves'])
+    this.router.navigate(['eleves'])
   }
 
 }
