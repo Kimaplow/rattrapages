@@ -3,3 +3,36 @@
     height: 180px;
     width: 220px;
 }
+
+
+.navbar .container-fluid .navbar-brand{
+    color:#77649b;
+}
+.navbar{
+    background-color:#1c0c37;
+}
+.nav-item .nav-link:hover{
+    color:#b2a4ce;
+}
+.nav-item .nav-link{
+    color:#77649b;
+}
+.btn-primary:hover{
+    background-color: #8064A2 !important;
+    color: #1c0c37!important;
+    border-color:#1c0c37!important;
+   
+}
+ 
+.btn-primary{
+    background-color: #1c0c37!important;
+    color:#77649b!important;
+    border-color:#77649b!important;
+    font-weight: bold;
+}
+th{
+color:#77649b;
+}
+td,h1{
+color: #1c0c37;
+}

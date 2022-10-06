@@ -32,7 +32,7 @@
                             </p>
                             <p [hidden]="c.present === false || c.note > 0 ||!(noteForm.value.note === '')">Entrer une note svp</p>
                             <form class="card-text" #noteForm="ngForm" (ngSubmit)="noteEleve(c.id.idEleve, c.id.idRattrapage, noteForm.value)">
-                                <button type="submit" class="btn btn-primary" [disabled]="user.role !== 'professeur' || c.present === false || c.rattrapage.etat === 'Non effectué'">Noter</button>
+                                <button type="submit" class="btn btn-primary" [disabled]="user.role !== 'professeur' || c.present === false || c.rattrapage.etat === 'Effectué et noté'">Noter</button>
                                 <input class="col-md-4 ms-2" id="note" name="note" type="number" step="0.5" max="20" min="1" ngModel
                                 [disabled]="user.role !== 'professeur' || c.present === false || c.rattrapage.etat === 'Non effectué' ">
                                 (note actuelle : {{ c.note }})
