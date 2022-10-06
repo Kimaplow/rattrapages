@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Objects;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         EditText emailMainActivity = findViewById(R.id.emailMainActivity);
         EditText passwordMainActivity = findViewById(R.id.passwordMainActivity);
+
+        ImageView logo = findViewById(R.id.logoMainActivity);
+        logo.setImageResource(R.drawable.mortarboard_fill);
 
         String email = emailMainActivity.getText().toString();
         String password = passwordMainActivity.getText().toString();
