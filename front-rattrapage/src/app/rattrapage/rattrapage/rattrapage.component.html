@@ -9,6 +9,8 @@
         <th>Date</th>
         <th>Heure</th>
         <th>Durée</th>
+        <th>Matière</th>
+        <th>Salle</th>
         <th>Etat</th>
         <th>Sujet</th>
         <th>Action</th>
@@ -18,6 +20,8 @@
             <td>{{ r.date }}</td>
             <td>{{ r.heure }}</td>
             <td>{{ r.duree }} min</td>
+            <td>{{ r.matiere.libelle }}</td>
+            <td>{{ r.salle.nom }}</td>
             <td>{{ r.etat }}</td>
             <td><a href="{{ urlPdf + r.sujet }}" target="_blank" rel="noopener noreferrer">{{ r.sujet }}</a></td>
             <td><button class="btn btn-primary" [disabled]="user.role !== 'responsable' && r.etat === 'Effectué et noté'" (click)="goToDetailRattrapage(r.idRattrapage)">Consulter</button></td>
